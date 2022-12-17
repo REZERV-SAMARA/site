@@ -1,0 +1,23 @@
+{
+	"name": "rezerv-site",
+	"version": "1.0.0",
+	"description": "Сайт ГКУЗ МЦ «Резерв»",
+	"main": "Gruntfile.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/REZERV-SAMARA/site.git"
+	},
+	"author": "ProjectSoft <projectsoft2009@yandex.ru>",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/REZERV-SAMARA/site/issues"
+	},
+	"homepage": "https://github.com/REZERV-SAMARA/site#readme",
+	"devDependencies": {
+		"grunt": "^1.5.3",
+		"grunt-favicons": "^0.8.0"
+	}
+}
