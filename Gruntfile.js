@@ -354,35 +354,7 @@ module.exports = function(grunt){
 						ext: '.html'
 					}
 				]
-			},
-			/*tpl: {
-				options: {
-					client: false,
-					pretty: '\t',
-					separator: '\n',
-					//pretty: '',
-					//separator: '',
-					doctype: 'html',
-					data: function(dest, src) {
-						return {
-							"base": "[(site_url)]",
-							"tem_path" : "/assets/templates/projectsoft",
-							"img_path" : "assets/templates/projectsoft/images/",
-							"site_name": "[(site_name)]",
-							"hash": uniqid(),
-						}
-					},
-				},
-				files: [
-					{
-						expand: true,
-						dest: __dirname + '/site/assets/templates/projectsoft/html/tpl/',
-						cwd:  __dirname + '/src/pug/tpl/',
-						src: '*.pug',
-						ext: '.html'
-					}
-				]
-			}*/
+			}
 		},
 	});
 	grunt.registerTask('default', [
