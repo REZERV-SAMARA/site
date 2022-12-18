@@ -13,6 +13,14 @@ module.exports = function(grunt){
 			options: {
 				force: true
 			},
+			default: {
+				src: [
+					'site/assets/templates/projectsoft/*',
+					'site/manifest.webmanifest',
+					'site/*.ico',
+					'site/*.png'
+				]
+			},
 			favicons: {
 				src: [
 					'site/manifest.webmanifest',
@@ -45,14 +53,6 @@ module.exports = function(grunt){
 					'site/assets/templates/projectsoft/images/*'
 				]
 			},
-			all: {
-				src: [
-					'site/assets/templates/projectsoft/*',
-					'site/manifest.webmanifest',
-					'site/*.ico',
-					'site/*.png'
-				]
-			},
 		},
 		favicons: {
 			options: {
@@ -80,13 +80,13 @@ module.exports = function(grunt){
 				truncateHTML: false,
 				html: 'src/pug/inc/favicon.pug'
 			},
-			icons: {
+			default: {
 				src: 'src/favicon/favicon.png',
 				dest: 'site'
 			}
 		},
 		webfont: {
-			icons: {
+			default: {
 				src: 'src/glyph/*.svg',
 				dest: 'site/assets/templates/projectsoft/fonts/',
 				options: {
@@ -116,7 +116,7 @@ module.exports = function(grunt){
 				}
 			},
 		},
-		/*ttf2woff2: {
+		ttf2woff2: {
 		    default: {
 				src: ["src/fonts/*.ttf"],
 				dest: "site/assets/templates/projectsoft/fonts/"
@@ -133,7 +133,7 @@ module.exports = function(grunt){
 				src: 'src/fonts/*.ttf',
 				dest: 'site/assets/templates/projectsoft/fonts/'
 			}
-		},*/
+		},
 		concat: {
 			options: {
 				separator: "\n",
@@ -141,7 +141,7 @@ module.exports = function(grunt){
 			appjs: {
 				src: [
 					'bower_components/jquery/dist/jquery.js',
-					/*"bower_components/fancybox/src/js/core.js",
+					"bower_components/fancybox/src/js/core.js",
 					"bower_components/fancybox/src/js/media.js",
 					"bower_components/fancybox/src/js/guestures.js",
 					"bower_components/fancybox/src/js/slideshow.js",
@@ -149,7 +149,7 @@ module.exports = function(grunt){
 					"bower_components/fancybox/src/js/thumbs.js",
 					"bower_components/fancybox/src/js/hash.js",
 					"bower_components/fancybox/src/js/wheel.js",
-					'bower_components/slick-carousel/slick/slick.js',
+					/*'bower_components/slick-carousel/slick/slick.js',
 					'bower_components/js-cookie/src/js.cookie.js',
 					'bower_components/jquery.cookie/jquery.cookie.js'*/
 				],
@@ -170,7 +170,7 @@ module.exports = function(grunt){
 					drop_console: false
 	  			}
 			},
-			app: {
+			default: {
 				files: [
 					{
 						expand: true,
@@ -197,7 +197,7 @@ module.exports = function(grunt){
 					}
 				]
 			},
-			base: {
+			default: {
 				files: [
 					{
 						expand: true,
@@ -218,7 +218,7 @@ module.exports = function(grunt){
 			}
 		},
 		tinyimg: {
-			dynamic: {
+			default: {
 				files: [
 					{
 						expand: true,
@@ -230,7 +230,7 @@ module.exports = function(grunt){
 			}
 		},
 		less: {
-			css: {
+			default: {
 				options : {
 					compress: false,
 					ieCompat: false,
@@ -240,11 +240,7 @@ module.exports = function(grunt){
 					modifyVars: {
 						'hashes': '\'' + uniqid() + '\'',
 						'fontpath': '/assets/templates/projectsoft/fonts',
-						'imgpath': '/assets/templates/projectsoft/images',
-						'white': '#ffffff',
-						'bg-color': '#0098ff',
-						'white': '#ffffff',
-						'padding': '15px',
+						'imgpath': '/assets/templates/projectsoft/images'
 					}
 				},
 				files : {
@@ -261,7 +257,7 @@ module.exports = function(grunt){
 				],
 				cascade: true
 			},
-			css: {
+			default: {
 				files: {
 					'test/css/prefix.main.css' : [
 						'test/css/main.css'
@@ -277,7 +273,7 @@ module.exports = function(grunt){
 			}
 		},
 		replace: {
-			css: {
+			default: {
 				options: {
 					patterns: [
 						{
@@ -317,21 +313,21 @@ module.exports = function(grunt){
 				mergeIntoShorthands: false,
 				roundingPrecision: -1
 			},
-			minify: {
+			default: {
 				files: {
 					'site/assets/templates/projectsoft/css/main.min.css' : ['test/css/replace/main.css']
 				}
 			}
 		},
 		pug: {
-			serv: {
+			default: {
 				options: {
 					doctype: 'html',
 					client: false,
-					//pretty: '\t',
-					//separator: '\n',
-					pretty: '',
-					separator: '',
+					pretty: '\t',
+					separator: '\n',
+					//pretty: '',
+					//separator: '',
 					data: function(dest, src) {
 						return {
 							"base": "[(site_url)]",
@@ -349,16 +345,23 @@ module.exports = function(grunt){
 						src: [ '*.pug' ],
 						dest: 'site/assets/templates/projectsoft/html/',
 						ext: '.html'
+					},
+					{
+						expand: true,
+						cwd:  __dirname + '/src/pug/tpl/',
+						src: ['*.pug'],
+						dest: __dirname + '/site/assets/templates/projectsoft/html/tpl/',
+						ext: '.html'
 					}
 				]
 			},
-			tpl: {
+			/*tpl: {
 				options: {
 					client: false,
-					//pretty: '\t',
-					//separator: '\n',
-					pretty: '',
-					separator: '',
+					pretty: '\t',
+					separator: '\n',
+					//pretty: '',
+					//separator: '',
 					doctype: 'html',
 					data: function(dest, src) {
 						return {
@@ -379,16 +382,16 @@ module.exports = function(grunt){
 						ext: '.html'
 					}
 				]
-			}
+			}*/
 		},
 	});
 	grunt.registerTask('default', [
-		'clean:all',
+		'clean:default',
 		'favicons',
 		'webfont',
-		/*'ttf2woff2',
+		'ttf2woff2',
 		'ttf2woff',
-		'ttf2eot',*/
+		'ttf2eot',
 		'imagemin',
 		'tinyimg',
 		'concat',

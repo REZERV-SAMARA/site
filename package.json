@@ -41,6 +41,6 @@
 		"less-plugin-npm-import": "^2.1.0",
 		"load-grunt-tasks": "^5.1.0",
 		"md5": "^2.3.0",
-		"time-grunt": "^2.0.0"
+		"time-grunt": "git+https://github.com/ProjectSoft-STUDIONIONS/time-grunt.git"
 	}
 }
