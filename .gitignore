@@ -1,7 +1,12 @@
-site
+site/**/*.*
+site/**/.*
 test
 tests
 node_modules
 bower_components
 *-lock.json
 *.sublime-workspace
+!site/develop/.*
+!site/develop/*.*
+!site/develop/**/.*
+!site/develop/**/*.*
