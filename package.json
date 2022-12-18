@@ -18,6 +18,29 @@
 	"homepage": "https://github.com/REZERV-SAMARA/site#readme",
 	"devDependencies": {
 		"grunt": "^1.5.3",
-		"grunt-favicons": "^0.8.0"
+		"grunt-autoprefixer": "^3.0.4",
+		"grunt-contrib-clean": "^2.0.0",
+		"grunt-contrib-concat": "^1.0.1",
+		"grunt-contrib-copy": "^1.0.0",
+		"grunt-contrib-cssmin": "^4.0.0",
+		"grunt-contrib-imagemin": "^4.0.0",
+		"grunt-contrib-less": "^3.0.0",
+		"grunt-contrib-pug": "^3.0.0",
+		"grunt-contrib-requirejs": "^1.0.0",
+		"grunt-contrib-uglify-es": "^3.3.0",
+		"grunt-contrib-watch": "^1.1.0",
+		"grunt-favicons": "git+https://github.com/ProjectSoft-STUDIONIONS/grunt-favicons.git",
+		"grunt-group-css-media-queries": "^1.0.1",
+		"grunt-lineending": "^1.0.0",
+		"grunt-replace": "^2.0.1",
+		"grunt-tinyimg": "^1.0.0",
+		"grunt-ttf2eot": "^1.0.0",
+		"grunt-ttf2woff": "^1.0.1",
+		"grunt-ttf2woff2": "^1.0.1",
+		"grunt-webfont": "^1.7.2",
+		"less-plugin-npm-import": "^2.1.0",
+		"load-grunt-tasks": "^5.1.0",
+		"md5": "^2.3.0",
+		"time-grunt": "^2.0.0"
 	}
 }

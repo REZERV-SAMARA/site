@@ -1,0 +1,29 @@
+<% for (var glyphIdx = 0; glyphIdx < glyphs.length; glyphIdx++) { %>@<%= classPrefix %><%= glyphs[glyphIdx] %>: "\<%= codepoints[glyphIdx] %>";
+<% } %>
+@font-face {
+	font-family:"<%= fontFamilyName %>";<% if (fontSrc1) { %>
+	src:<%= fontSrc1 %>;<% }%>
+	src:<%= fontSrc2 %>;
+	font-weight:normal;
+	font-style:normal;
+	font-display: swap;
+}
+[class^="<%= classPrefix %>"]:before,
+[class*=" <%= classPrefix %>"]:before {
+	font-family: "<%= fontFamilyName %>" !important;
+	speak: none;
+	font-style: normal !important;
+	font-weight: normal !important;
+	font-variant: normal !important;
+	text-transform: none !important;
+	line-height: 1;
+	text-rendering: auto !important;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+<% for (var glyphIdx = 0; glyphIdx < glyphs.length; glyphIdx++) { %>
+.<%= classPrefix %><%= glyphs[glyphIdx] %> {
+	&:before {
+		content: @<%= classPrefix %><%= glyphs[glyphIdx] %>;
+	}
+}<% } %>

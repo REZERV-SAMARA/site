@@ -1,6 +1,7 @@
+site
 test
 tests
 node_modules
-bower_componet
+bower_components
 *-lock.json
 *.sublime-workspace
