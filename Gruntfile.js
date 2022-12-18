@@ -356,6 +356,97 @@ module.exports = function(grunt){
 				]
 			}
 		},
+		watch: {
+			less: {
+				files: [
+					'src/less/**/*.*',
+				],
+				tasks: [
+					'clean:css',
+					'clean:html',
+					'less',
+					'autoprefixer',
+					'group_css_media_queries',
+					'replace',
+					'cssmin',
+					'pug'
+				]
+			},
+			js: {
+				files: [
+					'src/js/**/*.*',
+				],
+				tasks: [
+					'clean:js',
+					'clean:html',
+					'concat',
+					'uglify',
+					'pug'
+				]
+			},
+			pug: {
+				files: [
+					'src/pug/**/*.*',
+				],
+				tasks: [
+					'clean:html',
+					'pug'
+				]
+			},
+			images: {
+				files: [
+					'src/images/**/*.*',
+				],
+				tasks: [
+					'clean:images',
+					'clean:css',
+					'clean:html',
+					'imagemin',
+					'tinyimg',
+					'less',
+					'autoprefixer',
+					'group_css_media_queries',
+					'replace',
+					'cssmin',
+					'pug'
+				]
+			},
+			fonts : {
+				files: [
+					'src/fonts/**/*.*',
+				],
+				tasks: [
+					'clean:fonts',
+					'clean:css',
+					'clean:html',
+					'less',
+					'autoprefixer',
+					'group_css_media_queries',
+					'replace',
+					'cssmin',
+					'pug'
+				]
+			},
+			glyph : {
+				files: [
+					'src/glyph/**/*.*',
+				],
+				tasks: [
+					'clean:css',
+					'clean:html',
+					'webfont',
+					'ttf2woff2',
+					'ttf2woff',
+					'ttf2eot',
+					'less',
+					'autoprefixer',
+					'group_css_media_queries',
+					'replace',
+					'cssmin',
+					'pug'
+				]
+			}
+		}
 	});
 	grunt.registerTask('default', [
 		'clean:default',
@@ -375,4 +466,5 @@ module.exports = function(grunt){
 		'cssmin',
 		'pug'
 	]);
+	grunt.registerTask('dev', ["watch"]);
 }
