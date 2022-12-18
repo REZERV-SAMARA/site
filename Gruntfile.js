@@ -1,11 +1,13 @@
 module.exports = function(grunt){
 	require('load-grunt-tasks')(grunt);
 	require('time-grunt')(grunt);
-	const NpmImportPlugin = require("less-plugin-npm-import"),
+	const path = require('path'),
+		NpmImportPlugin = require("less-plugin-npm-import"),
 		uniqid = function() {
 			var timestamp = new Date().getTime().toString();
 			return timestamp;
-		};
+		},
+		pathSite = path.join(__dirname, 'site/');
 	grunt.initConfig({
 		globalConfig: {},
 		pkg: grunt.file.readJSON('package.json'),
@@ -82,7 +84,7 @@ module.exports = function(grunt){
 			},
 			default: {
 				src: 'src/favicon/favicon.png',
-				dest: 'site'
+				dest: pathSite
 			}
 		},
 		webfont: {
