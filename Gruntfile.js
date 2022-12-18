@@ -17,7 +17,11 @@ module.exports = function(grunt){
 			},
 			default: {
 				src: [
-					'site/assets/templates/projectsoft/*',
+					'site/assets/templates/projectsoft/css',
+					'site/assets/templates/projectsoft/fonts',
+					'site/assets/templates/projectsoft/html',
+					'site/assets/templates/projectsoft/images',
+					'site/assets/templates/projectsoft/js',
 					'site/manifest.webmanifest',
 					'site/*.ico',
 					'site/*.png'
@@ -30,19 +34,14 @@ module.exports = function(grunt){
 					'site/*.png'
 				]
 			},
-			fonts: {
-				src: [
-					'site/assets/templates/projectsoft/fonts/*'
-				]
-			},
 			css: {
 				src: [
 					'site/assets/templates/projectsoft/css/*'
 				]
 			},
-			js: {
+			fonts: {
 				src: [
-					'site/assets/templates/projectsoft/js/*'
+					'site/assets/templates/projectsoft/fonts/*'
 				]
 			},
 			html: {
@@ -53,6 +52,11 @@ module.exports = function(grunt){
 			images: {
 				src: [
 					'site/assets/templates/projectsoft/images/*'
+				]
+			},
+			js: {
+				src: [
+					'site/assets/templates/projectsoft/js/*'
 				]
 			},
 		},
