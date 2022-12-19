@@ -253,7 +253,6 @@ module.exports = function(grunt){
 				},
 				files : {
 					'test/css/main.css' : [
-						'src/less/plugins/bvi/less/bvi.less',
 						'src/less/main.less'
 					]
 				}

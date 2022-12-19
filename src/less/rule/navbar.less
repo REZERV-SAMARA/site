@@ -1,0 +1,40 @@
+.navbar {
+	&-site {
+		nav {
+			ul {
+				display: flex;
+				flex-direction: row;
+				flex-wrap: wrap;
+				list-style: none;
+				flex: 1 0 auto;
+				padding: 0;
+				margin: 0;
+				li {
+					list-style: none;
+					white-space: nowrap;
+					padding: 0;
+					margin: 0;
+					flex: auto;
+					a,
+					span {
+						font-size: 1.1em;
+						display: block;
+						text-decoration: none;
+						padding: @padding;
+						text-align: center;
+						filter: none !important;
+						outline: 0 !important;
+						text-transform: uppercase;
+						font-weight: 700;
+					}
+					a {
+						color: var(--link-color);
+					}
+					span {
+						color: var(--color);
+					}
+				}
+			}
+		}
+	}
+}

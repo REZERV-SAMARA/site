@@ -1,0 +1,28 @@
+header.header.container-full
+	.row.header-site
+		.container.clearfix
+			.header-top
+				.header-top-title
+					p.header-top-title-image
+						|<@IF:[*id:is(1):or:is(0)*]>
+						img(alt="Герб Самарской области" src!="[[phpthumb? &input=`assets/templates/projectsoft/images/samara.png` &options=`w=64,h=64,f=png`]]")
+						|<@ELSE>
+						a(href="/")
+							img(alt="Герб Самарской области" src!="[[phpthumb? &input=`assets/templates/projectsoft/images/samara.png` &options=`w=64,h=64,f=png`]]")
+						|<@ENDIF>
+					p.header-top-title-title
+						|ГКУЗ Самарский областной медицинский центр мобилизационных резервов «РЕЗЕРВ» Министерства здравоохранения Самарской области
+				.header-top-bvi
+					a(href="javascript:;" class="bvi-open btn")
+						i.glyph-glass-eye-spectacles
+	.row.header-nav
+		.container.clearfix
+			.navbar-site
+				nav
+					|[[DLMenu?
+					|	&parents=`0`
+					|	&maxDepth=`1`
+					|	&outerTpl=`@CODE:<ul[+classes+]>[+wrap+]</ul>`
+					|	&rowTpl=`@CODE:<li[+classes+]><a href="[+url+]" [+link_attributes+]>[+title+]</a></li>`
+					|	&rowHereTpl=`@CODE:<li[+classes+]><span>[+title+]</span></li>
+					|]]

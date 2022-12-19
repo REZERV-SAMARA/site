@@ -5,14 +5,11 @@ html(lang="ru" prefix="og: http://ogp.me/ns#")
 	|{{@FILE assets/templates/projectsoft/html/tpl/head.html}}
 	body
 		.bodywrapp
-			.header
-				.container.clearfix
-					p
-						|Header
-			.main
+			|{{@FILE assets/templates/projectsoft/html/tpl/header.html}}
+			main.main
 				.container.clearfix
 					|[*content*]
-			.footer
+			footer.footer
 				.container.clearfix
 					p
 						|Footer

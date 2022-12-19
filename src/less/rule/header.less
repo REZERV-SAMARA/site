@@ -1,0 +1,35 @@
+.header {
+	&-site {
+		background-color: #333;
+		color: #fff;
+	}
+	&-top {
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-between;
+		&-title {
+			display: flex;
+			align-items: center;
+			padding-right: @padding;
+			&-image {
+				padding-right: @padding;
+			}
+			&-title {
+				font-weight: 700;
+				font-size: 1.4em;
+				text-transform: uppercase;
+			}
+		}
+		&-bvi {
+			margin-top: 18px;
+			.btn {
+				color: #a7a7a7;
+				font-size: .875rem;
+				transition: color .3s ease;
+				&:hover {
+					color: #fff;
+				}
+			}
+		}
+	}
+}
