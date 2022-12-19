@@ -8,7 +8,14 @@ html(lang="ru" prefix="og: http://ogp.me/ns#")
 			|{{@FILE assets/templates/projectsoft/html/tpl/header.html}}
 			main.main
 				.container.clearfix
-					|[*content*]
+					|{{@FILE assets/templates/projectsoft/html/tpl/baner.html}}
+					.main-section
+						.main-article
+							.main-header
+								h1
+									|[*longtitle*]
+							.main-content
+								|[*content*]
 			footer.footer
 				.container.clearfix
 					p

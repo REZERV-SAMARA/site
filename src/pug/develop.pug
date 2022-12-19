@@ -7,9 +7,17 @@ html(lang="ru" prefix="og: http://ogp.me/ns#")
 		.bodywrapp
 			|{{@FILE assets/templates/projectsoft/html/tpl/header.html}}
 			main.main
-				p
-					|Text
+				.container.clearfix
+					|{{@FILE assets/templates/projectsoft/html/tpl/baner.html}}
+					.main-section
+						.main-article
+							.main-header
+								h1
+									|[*longtitle*]
+							.main-content
+								|[*content*]
 			footer.footer
-				p
-					|Text
+				.container.clearfix
+					p
+						|Footer
 		include inc/javascript.pug

@@ -2,6 +2,7 @@
 	&-site {
 		background-color: #333;
 		color: #fff;
+		user-select: none;
 	}
 	&-top {
 		display: flex;
@@ -24,10 +25,23 @@
 			margin-top: 18px;
 			.btn {
 				color: #a7a7a7;
-				font-size: .875rem;
+				font-size: 1em;
 				transition: color .3s ease;
+				i {
+					&::before {
+						transform: scale(1.0);
+						transform-origin: center center;
+						transition: transform .3s ease;
+					}
+				}
 				&:hover {
 					color: #fff;
+					transform: scale(1.1);
+					i {
+						&::before {
+							transform: scale(1.1);
+						}
+					}
 				}
 			}
 		}
