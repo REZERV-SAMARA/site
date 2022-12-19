@@ -17,6 +17,7 @@
   "dependencies": {
     "jquery": "^3.6.2",
     "bootstrap": "3",
-    "fancybox": "^3.5.7"
+    "fancybox": "^3.5.7",
+    "button-visually-impaired-javascript": "https://github.com/veks/button-visually-impaired-javascript.git#^1.0.0"
   }
 }
