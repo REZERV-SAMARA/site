@@ -80,7 +80,7 @@ module.exports = function(grunt){
 				/* FireFox */
 				firefox: true,
 				firefoxRound: true,
-				firefoxManifest: 'site/manifest.webmanifest',
+				firefoxManifest: 'test/favicons/manifest.webmanifest',
 				HTMLPrefix: '[(site_url)]',
 				/* HTML */
 				truncateHTML: false,
@@ -88,7 +88,8 @@ module.exports = function(grunt){
 			},
 			default: {
 				src: 'src/favicon/favicon.png',
-				dest: pathSite
+				//dest: path.join(__dirname, 'test/favicons')
+				dest: 'test/favicons'
 			}
 		},
 		webfont: {
@@ -364,6 +365,26 @@ module.exports = function(grunt){
 				]
 			}
 		},
+		copy: {
+			default: {
+				files: [
+					// Favicons
+					{
+						expand: true,
+						cwd: 'test/favicons',
+						src: '**',
+						dest: 'site/',
+					},
+					// Fonts
+					{
+						expand: true,
+						cwd: 'src/fonts',
+						src: '**',
+						dest: 'site/assets/templates/projectsoft/fonts/',
+					},
+				]
+			},
+		},
 		watch: {
 			less: {
 				files: [
@@ -472,7 +493,8 @@ module.exports = function(grunt){
 		'group_css_media_queries',
 		'replace',
 		'cssmin',
-		'pug'
+		'pug',
+		'copy'
 	]);
 	grunt.registerTask('dev', ["watch"]);
 }
