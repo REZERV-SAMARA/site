@@ -10,11 +10,11 @@ head
 	meta(name="yandex-verification" content="[(yandex_verification)]")
 	|[*noIndex*]
 	// Favicons
+	meta(name="apple-mobile-web-app-title" content="[(site_name)]")
+	meta(name="application-name" content="[(site_name)]")
 	include ../inc/favicon.pug
 	// Style
 	include ../inc/style.pug
-	meta(name="apple-mobile-web-app-title" content="[(site_name)]")
-	meta(name="application-name" content="[(site_name)]")
 	// Seo
 	link(rel="canonical" href!="[!getFullUrl? &arr=`` &id=`[*id*]`!]")
 	meta(name="title" content="[*pagetitle:hsc:notags*]")
