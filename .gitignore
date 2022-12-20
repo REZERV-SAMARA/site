@@ -42,3 +42,5 @@ site/assets/templates/projectsoft/images
 site/assets/templates/projectsoft/js
 site/assets/templates/projectsoft/*.html
 site/assets/templates/projectsoft/develop/*.html
+site/composer.lock
+!site/composer.json

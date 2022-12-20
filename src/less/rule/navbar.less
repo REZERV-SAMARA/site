@@ -1,5 +1,7 @@
 .navbar {
 	&-site {
+		margin-top: @padding;
+		margin-bottom: @padding;
 		nav {
 			user-select: none;
 			ul {
@@ -32,8 +34,14 @@
 						font-weight: 700;
 					}
 					a {
-						color: var(--link-color);
 						cursor: pointer;
+						&,
+						&:hover {
+							color: var(--color);
+						}
+						&:hover {
+							text-decoration: underline;
+						}
 					}
 					span {
 						color: var(--color);
