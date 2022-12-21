@@ -254,7 +254,10 @@ module.exports = function(grunt){
 				files : {
 					'test/css/main.css' : [
 						'src/less/main.less'
-					]
+					],
+					'test/css/content.css' : [
+						'src/less/content.less'
+					],
 				}
 			}
 		},
@@ -269,14 +272,22 @@ module.exports = function(grunt){
 				files: {
 					'test/css/prefix.main.css' : [
 						'test/css/main.css'
-					]
+					],
+					'test/css/prefix.content.css' : [
+						'test/css/content.css'
+					],
 				}
 			}
 		},
 		group_css_media_queries: {
 			group: {
 				files: {
-					'test/css/media/main.css': ['test/css/prefix.main.css']
+					'test/css/media/main.css': [
+						'test/css/prefix.main.css'
+					],
+					'test/css/media/content.css': [
+						'test/css/prefix.content.css'
+					],
 				}
 			}
 		},
@@ -308,6 +319,15 @@ module.exports = function(grunt){
 						expand: true,
 						flatten : true,
 						src: [
+							'test/css/media/content.css'
+						],
+						dest: 'test/css/replace/',
+						filter: 'isFile'
+					},
+					{
+						expand: true,
+						flatten : true,
+						src: [
 							'test/css/media/main.css'
 						],
 						dest: 'site/assets/templates/projectsoft/css/',
@@ -323,7 +343,8 @@ module.exports = function(grunt){
 			},
 			default: {
 				files: {
-					'site/assets/templates/projectsoft/css/main.min.css' : ['test/css/replace/main.css']
+					'site/assets/templates/projectsoft/css/main.min.css' : ['test/css/replace/main.css'],
+					'site/assets/templates/projectsoft/css/content.min.css' : ['test/css/replace/content.css'],
 				}
 			}
 		},

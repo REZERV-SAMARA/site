@@ -3,9 +3,12 @@
 	color: var(--bg-select-color);
 }
 a {
-	color: rgb(0, 0, 238);
+	color: #818181;
+	text-decoration: underline;
+	text-decoration-color: var(--color);
+	text-decoration-style: solid;
 	&:hover {
-		color: rgb(255, 0, 0);
+		color: #000;
 	}
 }
 * {
@@ -19,4 +22,8 @@ body {
 	background-color: var(--bg-color);
 	color: var(--color);
 	font-family: "PT Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+	&.mce-content-body {
+		padding-left: @padding;
+		padding-right: @padding;
+	}
 }

@@ -6,21 +6,19 @@
 			tbody
 				tr
 					td Адрес:
-					td 420021, г.Казань, ул.Габдуллы Тукая, д.67
+					td [(map_addres:notags)]
 				tr
 					td Телефон:
-					td +7 (843) 293-48-21
+					td [(map_phones:notags:nl2br)]
 				tr
 					td E-Mail:
-					td mz.rezerv@tatar.ru
+					td [(map_email:notags:nl2br)]
 	.card__person
 		.card__person-photo
-			a(href="/index.htm/person-info")
-				img(src="//tatarstan.ru//file/photo_25005.jpg" style="max-width: 150px;")
+			a(href="[~4~]")
+				img(src!="[[phpthumb? &input=`[(director_photo)]` &options=`w=150,f=jpg`]]" style="max-width: 150px;")
 		.card__person-post
 			|Директор
 		.card__person-name
-			a(href="/index.htm/person-info")
-				|Шарипов Ильдар
-				br
-				|Салимзянович
+			a(href="[~4~]")
+				|[(director:notags:nl2br)]

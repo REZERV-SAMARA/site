@@ -22,8 +22,7 @@ html(lang="ru" prefix="og: http://ogp.me/ns#")
 												|[*content*]
 									.col-md-4.sidebar-wrapp
 										|{{@FILE assets/templates/projectsoft/html/tpl/card_contact.html}}
-			footer.footer
-				.container.clearfix
-					p
-						|Footer
+						.main-map
+							#map(data-point="[(map_point)]" data-addres="[(map_addres)]" data-phones="[(map_phones)]" data-email="[(map_email)]" data-zoom="[(map_zoom)]")
+			|{{@FILE assets/templates/projectsoft/html/tpl/footer.html}}
 		include inc/javascript.pug

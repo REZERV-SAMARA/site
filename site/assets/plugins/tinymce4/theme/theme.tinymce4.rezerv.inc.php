@@ -21,13 +21,13 @@ $this->set('plugins', 'autolink lists layer table modxlink image emoticons media
 // Первая строка тулбара
 $this->set('toolbar1', 'undo redo | cut copy paste pastetext | visualchars | visualblocks | code | fullscreen', 'string');
 // Вторая строка тулбара
-$this->set('toolbar2', 'bold italic underline strikethrough subscript superscript removeformat | alignleft aligncenter alignright alignjustify | bullist numlist | blockquote', 'string');
+$this->set('toolbar2', 'formatselect | bold italic underline strikethrough subscript superscript removeformat | alignleft aligncenter alignright alignjustify | bullist numlist | blockquote', 'string');
 // Третья строка тулбара
 $this->set('toolbar3', 'image media | link unlink | table | charmap emoticons', 'string');
 // Четвёртая строка тулбара (отключаем)
 $this->set('toolbar4', 'custom_format', 'string');
 // Основное меню (отключаем)
-$this->set('menubar', false, 'bool');
+$this->set('menubar', true, 'bool');
 // Выставляем свой формат выравнивания текста
 $this->set('formats', '{
 			alignleft: {

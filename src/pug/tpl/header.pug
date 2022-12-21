@@ -5,13 +5,13 @@ header.header.container-full
 				.header-top-title
 					p.header-top-title-image
 						|<@IF:[*id:is(1):or:is(0)*]>
-						img(alt="Герб Самарской области" src!="[[phpthumb? &input=`assets/templates/projectsoft/images/samara.png` &options=`w=64,h=64,f=png`]]")
+						img(alt="" src!="[[phpthumb? &input=`[(logotype)]` &options=`w=64,h=64,f=png`]]")
 						|<@ELSE>
 						a(href="/")
-							img(alt="Герб Самарской области" src!="[[phpthumb? &input=`assets/templates/projectsoft/images/samara.png` &options=`w=64,h=64,f=png`]]")
+							img(alt="" src!="[[phpthumb? &input=`[(logotype)]` &options=`w=64,h=64,f=png`]]")
 						|<@ENDIF>
 					p.header-top-title-title
-						|ГКУЗ Самарский областной медицинский центр мобилизационных резервов «РЕЗЕРВ» Министерства здравоохранения Самарской области
+						|[(company_name:notags)]
 				.header-top-bvi
 					a(href="javascript:;" class="bvi-open btn" title="Версия для слабовидящих")
 						i.glyph-glass-eye-spectacles
