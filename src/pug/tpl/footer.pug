@@ -4,7 +4,7 @@ footer.footer
 			.columns
 				.col-md-8.footer-title
 					p.footer-title-image
-						img(alt="Герб Самарской области" src!="[[phpthumb? &input=`[(logotype)]` &options=`w=64,h=64,f=png`]]")
+						img(alt="" src!="[[phpthumb? &input=`[(logotype)]` &options=`w=64,h=64,f=png`]]")
 					p.footer-title-text
 						|[(company_name:notags)]
 				.col-md-4.footer-addres
@@ -19,8 +19,9 @@ footer.footer
 							|[(map_phones:notags:nl2br)]
 						dt
 							|Email:
-						dd
-							|[(map_email:notags:nl2br)]
+						dd(style="word-break: break-all;")
+							a(href="mailto:[(map_email:notags:nl2br)]")
+								|[(map_email:notags:nl2br)]
 				.col-md-12.footer-copyright
 					p.text-center
 						|&copy; [(site_name)]

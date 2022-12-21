@@ -1,0 +1,43 @@
+.ballon {
+	background-color: #fff;
+	padding: 17px;
+	position: relative;
+	border: 1px solid #d8d8da;
+	text-align: left!important;
+	margin-left: 60px;
+	margin-top: -44px;
+	width: 330px;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	box-shadow: inset 0 -3px 0 0 #17a085;
+	&::after,
+	&::before {
+		right: 100%;
+		top: 50%;
+		border: solid transparent;
+		content: " ";
+		height: 0;
+		width: 0;
+		position: absolute;
+		pointer-events: none;
+	}
+	&::before {
+		border-color: transparent;
+		border-right-color: #d8d8da;
+		border-width: 18px;
+		margin-top: -18px;
+	}
+	&::after {
+		border-color: transparent;
+		border-right-color: #fff;
+		border-width: 16px;
+		margin-top: -16px;
+	}
+	&__close {
+		position: absolute;
+		right: 6px;
+		top: 3px;
+		cursor: pointer;
+	}
+}

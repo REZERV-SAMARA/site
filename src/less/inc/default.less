@@ -2,11 +2,17 @@
 	background-color: var(--bg-select);
 	color: var(--bg-select-color);
 }
+* {
+	-webkit-hyphens: auto;
+	-moz-hyphens: auto;
+	hyphens: auto;
+}
 a {
 	color: #818181;
 	text-decoration: underline;
 	text-decoration-color: var(--color);
 	text-decoration-style: solid;
+	transition: color .3s ease;
 	&:hover {
 		color: #000;
 	}

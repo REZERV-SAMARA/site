@@ -12,7 +12,9 @@
 					td [(map_phones:notags:nl2br)]
 				tr
 					td E-Mail:
-					td [(map_email:notags:nl2br)]
+					td(style="word-break: break-all;")
+						a(href="mailto:[(map_email:notags)]")
+							|[(map_email:notags)]
 	.card__person
 		.card__person-photo
 			a(href="[~4~]")
