@@ -13,8 +13,6 @@ head
 	meta(name="apple-mobile-web-app-title" content="[(site_name)]")
 	meta(name="application-name" content="[(site_name)]")
 	include ../inc/favicon.pug
-	// Style
-	include ../inc/style.pug
 	// Seo
 	link(rel="canonical" href!="[!getFullUrl? &arr=`` &id=`[*id*]`!]")
 	meta(name="title" content="[*pagetitle:hsc:notags*]")
@@ -24,5 +22,11 @@ head
 	link(rel="alternate" type="application/rss+xml" title="RSS " + site_name href!="[!getFullUrl? &arr=`` &id=`2`!]")
 	meta(name="og:title" content="[*pagetitle:hsc:notags*]")
 	meta(name="og:description" content="[*desc:hsc:notags*]")
+	// og images
 	|
 	|[[ogImage]]
+	// Style
+	include ../inc/style.pug
+	// Дополнительные стили
+	style(type="text/css")
+		|[(dop_styles)]

@@ -29,7 +29,12 @@
 	&__person {
 		margin-top: 5em;
 		&-photo {
-			max-width: 180px;
+			img {
+				max-width: 208px;
+				@media screen and (max-width: 767px) {
+					max-width: 100%;
+				}
+			}
 		}
 		&-post {
 			color: #9fa3b0;

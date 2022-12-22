@@ -20,16 +20,16 @@
 	.generate-columns(@n, @m, (@i + 1));
 }
 
-.generate-columns-size(@n, @m, @s, @i: 1) when (@i =< @n) {
+.generate-columns-size(@n, @m, @i: 1) when (@i =< @n) {
 	.col-@{m}-@{i} {
 		width: 100%;
 	}
-	.generate-columns-size(@n, @m, @s, (@i + 1));
+	.generate-columns-size(@n, @m, (@i + 1));
 }
 .generate-columns(12, md);
 
 @media screen and (max-width: 767px) {
-	.generate-columns-size(12, md, 768px);
+	.generate-columns-size(12, md);
 }
 
 @media screen and (max-width: 960px) {

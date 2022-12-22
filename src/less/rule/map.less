@@ -1,6 +1,7 @@
 .main {
 	&-map {
 		position: relative;
+		transition: margin-top .3s eace, padding-bottom .3s ease;
 		&.embed {
 			&-responsive {
 				margin-top: 2em;
@@ -14,6 +15,9 @@
 			bottom: 0;
 			width: 100%;
 			height: 100%;
+			[class*="_balloon_layout_panel"] {
+				bottom: 1px !important;
+			}
 		}
 	}
 }

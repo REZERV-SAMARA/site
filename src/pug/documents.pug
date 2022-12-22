@@ -1,6 +1,6 @@
 doctype html
 html(lang="ru-Ru" prefix="og: http://ogp.me/ns#")
-	// Шаблон «Сайт в разработке»
+	// Шаблон «Документы»
 	|
 	|{{@FILE assets/templates/projectsoft/html/tpl/head.html}}
 	body
@@ -16,5 +16,9 @@ html(lang="ru-Ru" prefix="og: http://ogp.me/ns#")
 									|<@IF:[*longtitle:isnot('')*]>[*longtitle*]<@ELSE>[*pagetitle*]<@ENDIF>
 							.main-content
 								|[*content*]
+							.main-files
+								|[[PageBuilder?
+								|	&docid=`[*id*]`
+								|]]
 			|{{@FILE assets/templates/projectsoft/html/tpl/footer.html}}
 		include inc/javascript.pug

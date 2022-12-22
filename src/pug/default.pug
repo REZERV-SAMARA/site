@@ -10,10 +10,10 @@ html(lang="ru-Ru" prefix="og: http://ogp.me/ns#")
 				.container.clearfix
 					|{{@FILE assets/templates/projectsoft/html/tpl/baner.html}}
 					.main-section
-						.main-article
-							.main-header
+						article.main-article
+							header.main-header
 								h1
-									|[*longtitle*]
+									|<@IF:[*longtitle:isnot('')*]>[*longtitle*]<@ELSE>[*pagetitle*]<@ENDIF>
 							.main-content
 								|[*content*]
 			|{{@FILE assets/templates/projectsoft/html/tpl/footer.html}}

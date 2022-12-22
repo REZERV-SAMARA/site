@@ -40,4 +40,28 @@
 		top: 3px;
 		cursor: pointer;
 	}
+	@media screen and (max-width: 578px) {
+		padding: unset;
+		position: relative;
+		border: unset;
+		text-align: left!important;
+		margin-left: unset;
+		margin-top: unset;
+		width: auto;
+		-webkit-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+		box-shadow: unset;
+		&__close,
+		&::before,
+		&::after {
+			display: none;
+		}
+		.text {
+			&-center,
+			&-right {
+				text-align: left;
+			}
+		}
+	}
 }
