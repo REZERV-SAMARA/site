@@ -1,7 +1,8 @@
 !(function($){
 	// Yandex.Maps
 	const bvi = new isvek.Bvi({
-		speech: false
+		speech: false,
+		panelFixed: false
 	});
 	console.log(bvi);
 	window.mapInit = function() {
