@@ -10,12 +10,67 @@
 			margin-bottom: 20px;
 		}
 		&-table {
-			td {
-				vertical-align: top;
-				&:first-of-type {
+			.dl-horizontal {
+				display: flex;
+				flex-direction: row;
+				flex-wrap: wrap;
+				dt {
 					width: 80px;
 					text-align: right;
 					padding-right: @padding;
+					font-weight: 500;
+				}
+				dd {
+					margin-left: unset;
+					width: 100%;
+					max-width: ~'calc(100% - 81px)';
+				}
+				@media screen and (min-width: 968px) {
+					dt {
+						width: 80px;
+						text-align: right;
+						padding-right: @padding;
+					}
+					dd {
+						margin-left: unset;
+						width: 100%;
+						max-width: ~'calc(100% - 81px)';
+					}
+				}
+				@media screen and (min-width: 768px) {
+					dt {
+						width: 100%;
+						text-align: left;
+						padding-right: @padding;
+					}
+					dd {
+						max-width: unset;
+						padding-left: @padding;
+					}
+					
+				}
+				@media screen and (max-width: 767px) {
+					dt {
+						width: 80px;
+						text-align: right;
+						padding-right: @padding;
+					}
+					dd {
+						margin-left: unset;
+						width: 100%;
+						max-width: ~'calc(100% - 81px)';
+					}
+				}
+				@media screen and (max-width: 361px) {
+					dt {
+						width: 100%;
+						text-align: left;
+						padding-right: @padding;
+					}
+					dd {
+						max-width: unset;
+						padding-left: @padding;
+					}
 				}
 			}
 		}

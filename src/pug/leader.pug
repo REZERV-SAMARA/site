@@ -10,13 +10,24 @@ html(lang="ru-Ru" prefix="og: http://ogp.me/ns#")
 				.container.clearfix
 					|{{@FILE assets/templates/projectsoft/html/tpl/baner.html}}
 					.main-section
-						article.main-article
-							header.main-header
-								h1
-									|<@IF:[*longtitle:isnot('')*]>[*longtitle*]<@ELSE>[*pagetitle*]<@ENDIF>
-							.main-content
-								|[*content*]
-							.main-files
-								|[[]]
+						article.main-article.leader
+							.row
+								header.main-header.columns
+									.col-md-8.leader-title
+										h1
+											|<@IF:[*longtitle:isnot('')*]>[*longtitle*]<@ELSE>[*pagetitle*]<@ENDIF>
+										p.leader-title-text
+											|Директор
+									.col-md-4.leader-image
+										p
+											img(src!="[[phpthumb? &input=`[(director_photo)]` &options=`w=370,h=493,zc=C` &noImage=`assets/templates/projectsoft/images/no_photo.png`]]" alt!="<@IF:[*longtitle:isnot('')*]>[*longtitle:notags*]<@ELSE>[*pagetitle:notags*]<@ENDIF>")
+									.col-md-12.leader-hr
+										hr
+								.main-content.columns.leader-content
+									.col-md-4.leader-content-title
+										h2
+											|Биография
+									.col-md-8.leader-content-text
+										|[*content*]
 			|{{@FILE assets/templates/projectsoft/html/tpl/footer.html}}
 		include inc/javascript.pug

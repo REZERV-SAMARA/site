@@ -1,0 +1,59 @@
+.leader {
+	&-title {
+		order: 1;
+		&-text {
+			font-size: 1.8em;
+		}
+		h1,
+		&-text {
+			padding-left: @padding * 2;
+		}
+	}
+	&-image {
+		order: 0;
+		padding-top: 0.6em;
+	}
+	&-hr {
+		order: 2;
+	}
+	&-content {
+		&-title {
+			text-transform: uppercase;
+			h2 {
+				margin-top: 0.2em;
+			}
+		}
+		&-text {
+			padding-left: @padding * 2 !important;
+			> p {
+				&:first-child {
+					margin-top: 0.5em;
+				}
+			}
+		}
+	}
+	@media screen and (max-width: 767px) {
+		&-title {
+			order: 0;
+			&-text {
+				font-size: 1.8em;
+			}
+			h1,
+			&-text {
+				padding-left: unset;
+			}
+		}
+		&-content {
+			&-text {
+				padding-left: @padding !important;
+			}
+		}
+		&-image {
+			order: 1;
+			padding-top: unset;
+		}
+		&-hr {
+			order: 2;
+		}
+	}
+}

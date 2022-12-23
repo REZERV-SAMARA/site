@@ -14,11 +14,12 @@ html(lang="ru-Ru" prefix="og: http://ogp.me/ns#")
 							header.main-header
 								h1
 									|<@IF:[*longtitle:isnot('')*]>[*longtitle*]<@ELSE>[*pagetitle*]<@ENDIF>
+							|<@IF:[*content:isnot('')*]>
 							.main-content
 								|[*content*]
-							.main-files
-								|[[PageBuilder?
-								|	&docid=`[*id*]`
-								|]]
+							|<@ENDIF>
+							|[[PageBuilder?
+							|	&docid=`[*id*]`
+							|]]
 			|{{@FILE assets/templates/projectsoft/html/tpl/footer.html}}
 		include inc/javascript.pug

@@ -2,17 +2,14 @@
 	.card__contacts
 		.card__contacts-title
 			|Контакты
-		table.card__contacts-table
-			tbody
-				tr
-					td Адрес:
-					td [(map_addres:notags)]
-				tr
-					td Телефон:
-					td [(map_phones:notags:nl2br)]
-				tr
-					td E-Mail:
-					td(style="word-break: break-all;")
+		.card__contacts-table
+			dl.dl-horizontal
+				dt Адрес:
+				dd [(map_addres:notags)]
+				dt Телефон:
+				dd [(map_phones:notags:nl2br)]
+				dt E-Mail:
+				dd(style="word-break: break-all;")
 						a(href="mailto:[(map_email:notags)]")
 							|[(map_email:notags)]
 	.card__person

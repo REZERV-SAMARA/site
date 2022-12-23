@@ -7,16 +7,6 @@
 	-moz-hyphens: auto;
 	hyphens: auto;
 }
-a {
-	color: #818181;
-	text-decoration: underline;
-	text-decoration-color: var(--color);
-	text-decoration-style: solid;
-	transition: color .3s ease;
-	&:hover {
-		color: #000;
-	}
-}
 * {
 	&,
 	&::before,
@@ -33,6 +23,19 @@ body {
 		padding-left: @padding;
 		padding-right: @padding;
 	}
+}
+a {
+	color: #818181;
+	text-decoration: underline;
+	text-decoration-color: var(--color);
+	text-decoration-style: solid;
+	transition: color .3s ease;
+	&:hover {
+		color: #000;
+	}
+}
+h1 {
+	text-transform: uppercase;
 }
 img {
 	max-width: 100%;

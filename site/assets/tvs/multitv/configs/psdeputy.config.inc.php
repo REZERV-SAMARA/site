@@ -42,7 +42,7 @@ $settings['templates'] = array(
 			<div class="row">
 				<div class="columns">
 					<div class="deputy-image col-md-4">
-						<p><img src="[[phpthumb? &input=`[+photo+]` &options=`w=180,h=236,zc=C`]]" alt="[+fio+]"</p>
+						<p><img src="[[phpthumb? &input=`[+photo+]` &options=`w=370,h=493,zc=C` &noImage=`assets/templates/projectsoft/images/no_photo.png`]]" alt="[+fio+]"</p>
 					</div>
 					<div class="col-md-8 deputy-content">
 						<header class="deputy-title">

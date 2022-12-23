@@ -1,10 +1,39 @@
 !(function($){
+	Array.prototype.last = function() {
+		return this[this.length - 1];
+	};
 	// Yandex.Maps
 	const bvi = new isvek.Bvi({
 		speech: false,
 		panelFixed: false
 	});
 	console.log(bvi);
+	$(document).on('click', '.nav-btn', function(e){
+		e.preventDefault();
+		$(e.target).closest('.navbar-site').toggleClass('open');
+		return !1;
+	});
+	$(document).on('click', ".main a", function(e){//[href$='.pdf']
+		const base = window.location.origin,
+			reg = new RegExp("^" + base),
+			regn = new RegExp('\.pdf$', 'gi'),
+			href = e.target.href;
+		if(reg.test(href)) {
+			try {
+				const url = new URL(href),
+					src = url.pathname;
+				if(regn.test(src)){
+					e.preventDefault();
+					$.fancybox.open({
+						src: base + '/assets/pdfjs/viewer/?file=' + href.replace(reg, '')
+					});
+					return !1
+				}
+			} catch (error) {
+				//error
+			} 
+		}
+	});
 	window.mapInit = function() {
 		const $map = $("#map");
 		if($map.length) {
