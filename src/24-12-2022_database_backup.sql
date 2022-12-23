@@ -1,12 +1,12 @@
 #
 # ГКУЗ МЦ «Резерв» г. Самара Database Dump
-# MODX Version:1.4.21
+# MODX Version:1.4.22
 # 
 # Host: 
-# Generation Time: 22-12-2022 21:23:41
-# Server version: 5.5.5-10.3.22-MariaDB
-# PHP Version: 7.4.5
-# Database: `EvoRezerv`
+# Generation Time: 24-12-2022 00:57:15
+# Server version: 5.6.51
+# PHP Version: 7.4.30
+# Database: `REZERV`
 # Description: 
 #
 
@@ -34,13 +34,13 @@ DROP TABLE IF EXISTS `evo_active_user_locks`;
 CREATE TABLE `evo_active_user_locks` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `sid` varchar(32) NOT NULL DEFAULT '',
-  `internalKey` int(9) NOT NULL DEFAULT 0,
-  `elementType` int(1) NOT NULL DEFAULT 0,
-  `elementId` int(10) NOT NULL DEFAULT 0,
-  `lasthit` int(20) NOT NULL DEFAULT 0,
+  `internalKey` int(9) NOT NULL DEFAULT '0',
+  `elementType` int(1) NOT NULL DEFAULT '0',
+  `elementId` int(10) NOT NULL DEFAULT '0',
+  `lasthit` int(20) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `ix_element_id` (`elementType`,`elementId`,`sid`)
-) ENGINE=MyISAM AUTO_INCREMENT=270 DEFAULT CHARSET=utf8 COMMENT='Contains data about locked elements.';
+) ENGINE=MyISAM AUTO_INCREMENT=306 DEFAULT CHARSET=utf8 COMMENT='Contains data about locked elements.';
 
 
 
@@ -53,8 +53,8 @@ CREATE TABLE `evo_active_user_locks` (
 DROP TABLE IF EXISTS `evo_active_user_sessions`;
 CREATE TABLE `evo_active_user_sessions` (
   `sid` varchar(32) NOT NULL DEFAULT '',
-  `internalKey` int(9) NOT NULL DEFAULT 0,
-  `lasthit` int(20) NOT NULL DEFAULT 0,
+  `internalKey` int(9) NOT NULL DEFAULT '0',
+  `lasthit` int(20) NOT NULL DEFAULT '0',
   `ip` varchar(50) NOT NULL DEFAULT '',
   PRIMARY KEY (`sid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Contains data about valid user sessions.';
@@ -70,9 +70,9 @@ CREATE TABLE `evo_active_user_sessions` (
 DROP TABLE IF EXISTS `evo_active_users`;
 CREATE TABLE `evo_active_users` (
   `sid` varchar(32) NOT NULL DEFAULT '',
-  `internalKey` int(9) NOT NULL DEFAULT 0,
+  `internalKey` int(9) NOT NULL DEFAULT '0',
   `username` varchar(50) NOT NULL DEFAULT '',
-  `lasthit` int(20) NOT NULL DEFAULT 0,
+  `lasthit` int(20) NOT NULL DEFAULT '0',
   `action` varchar(10) NOT NULL DEFAULT '',
   `id` int(10) DEFAULT NULL,
   PRIMARY KEY (`sid`,`username`)
@@ -90,7 +90,7 @@ DROP TABLE IF EXISTS `evo_categories`;
 CREATE TABLE `evo_categories` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `category` varchar(45) NOT NULL DEFAULT '',
-  `rank` int(5) unsigned NOT NULL DEFAULT 0,
+  `rank` int(5) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='Categories to be used snippets,tv,chunks, etc';
 
@@ -105,8 +105,8 @@ CREATE TABLE `evo_categories` (
 DROP TABLE IF EXISTS `evo_document_groups`;
 CREATE TABLE `evo_document_groups` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
-  `document_group` int(10) NOT NULL DEFAULT 0,
-  `document` int(10) NOT NULL DEFAULT 0,
+  `document_group` int(10) NOT NULL DEFAULT '0',
+  `document` int(10) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `ix_dg_id` (`document_group`,`document`),
   KEY `document` (`document`),
@@ -125,8 +125,8 @@ DROP TABLE IF EXISTS `evo_documentgroup_names`;
 CREATE TABLE `evo_documentgroup_names` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(245) NOT NULL DEFAULT '',
-  `private_memgroup` tinyint(4) DEFAULT 0 COMMENT 'determine whether the document group is private to manager users',
-  `private_webgroup` tinyint(4) DEFAULT 0 COMMENT 'determines whether the document is private to web users',
+  `private_memgroup` tinyint(4) DEFAULT '0' COMMENT 'determine whether the document group is private to manager users',
+  `private_webgroup` tinyint(4) DEFAULT '0' COMMENT 'determines whether the document is private to web users',
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Contains data used for access permissions.';
@@ -142,13 +142,13 @@ CREATE TABLE `evo_documentgroup_names` (
 DROP TABLE IF EXISTS `evo_event_log`;
 CREATE TABLE `evo_event_log` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `eventid` int(11) DEFAULT 0,
-  `createdon` int(11) NOT NULL DEFAULT 0,
-  `type` tinyint(4) NOT NULL DEFAULT 1 COMMENT '1- information, 2 - warning, 3- error',
-  `user` int(11) NOT NULL DEFAULT 0 COMMENT 'link to user table',
-  `usertype` tinyint(4) NOT NULL DEFAULT 0 COMMENT '0 - manager, 1 - web',
+  `eventid` int(11) DEFAULT '0',
+  `createdon` int(11) NOT NULL DEFAULT '0',
+  `type` tinyint(4) NOT NULL DEFAULT '1' COMMENT '1- information, 2 - warning, 3- error',
+  `user` int(11) NOT NULL DEFAULT '0' COMMENT 'link to user table',
+  `usertype` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0 - manager, 1 - web',
   `source` varchar(50) NOT NULL DEFAULT '',
-  `description` text DEFAULT NULL,
+  `description` text,
   PRIMARY KEY (`id`),
   KEY `user` (`user`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Stores event and error logs';
@@ -164,17 +164,17 @@ CREATE TABLE `evo_event_log` (
 DROP TABLE IF EXISTS `evo_manager_log`;
 CREATE TABLE `evo_manager_log` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
-  `timestamp` int(20) NOT NULL DEFAULT 0,
-  `internalKey` int(10) NOT NULL DEFAULT 0,
+  `timestamp` int(20) NOT NULL DEFAULT '0',
+  `internalKey` int(10) NOT NULL DEFAULT '0',
   `username` varchar(255) DEFAULT NULL,
-  `action` int(10) NOT NULL DEFAULT 0,
+  `action` int(10) NOT NULL DEFAULT '0',
   `itemid` varchar(10) DEFAULT '0',
   `itemname` varchar(255) DEFAULT NULL,
   `message` varchar(255) NOT NULL DEFAULT '',
   `ip` varchar(46) DEFAULT NULL,
   `useragent` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COMMENT='Contains a record of user interaction.';
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='Contains a record of user interaction.';
 
 
 
@@ -204,8 +204,8 @@ CREATE TABLE `evo_manager_users` (
 DROP TABLE IF EXISTS `evo_member_groups`;
 CREATE TABLE `evo_member_groups` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
-  `user_group` int(10) NOT NULL DEFAULT 0,
-  `member` int(10) NOT NULL DEFAULT 0,
+  `user_group` int(10) NOT NULL DEFAULT '0',
+  `member` int(10) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `ix_group_member` (`user_group`,`member`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Contains data used for access permissions.';
@@ -221,8 +221,8 @@ CREATE TABLE `evo_member_groups` (
 DROP TABLE IF EXISTS `evo_membergroup_access`;
 CREATE TABLE `evo_membergroup_access` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
-  `membergroup` int(10) NOT NULL DEFAULT 0,
-  `documentgroup` int(10) NOT NULL DEFAULT 0,
+  `membergroup` int(10) NOT NULL DEFAULT '0',
+  `documentgroup` int(10) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Contains data used for access permissions.';
 
@@ -258,11 +258,11 @@ CREATE TABLE `evo_pagebuilder` (
   `title` varchar(255) DEFAULT NULL,
   `config` varchar(255) NOT NULL,
   `values` mediumtext NOT NULL,
-  `visible` tinyint(1) unsigned DEFAULT 1,
+  `visible` tinyint(1) unsigned DEFAULT '1',
   `index` smallint(5) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `document_id` (`document_id`,`container`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 
 
@@ -282,34 +282,34 @@ CREATE TABLE `evo_site_content` (
   `description` varchar(255) NOT NULL DEFAULT '',
   `alias` varchar(245) DEFAULT '',
   `link_attributes` varchar(255) NOT NULL DEFAULT '' COMMENT 'Link attriubtes',
-  `published` int(1) NOT NULL DEFAULT 0,
-  `pub_date` int(20) NOT NULL DEFAULT 0,
-  `unpub_date` int(20) NOT NULL DEFAULT 0,
-  `parent` int(10) NOT NULL DEFAULT 0,
-  `isfolder` int(1) NOT NULL DEFAULT 0,
-  `introtext` text DEFAULT NULL COMMENT 'Used to provide quick summary of the document',
-  `content` mediumtext DEFAULT NULL,
-  `richtext` tinyint(1) NOT NULL DEFAULT 1,
-  `template` int(10) NOT NULL DEFAULT 0,
-  `menuindex` int(10) NOT NULL DEFAULT 0,
-  `searchable` int(1) NOT NULL DEFAULT 1,
-  `cacheable` int(1) NOT NULL DEFAULT 1,
-  `createdby` int(10) NOT NULL DEFAULT 0,
-  `createdon` int(20) NOT NULL DEFAULT 0,
-  `editedby` int(10) NOT NULL DEFAULT 0,
-  `editedon` int(20) NOT NULL DEFAULT 0,
-  `deleted` int(1) NOT NULL DEFAULT 0,
-  `deletedon` int(20) NOT NULL DEFAULT 0,
-  `deletedby` int(10) NOT NULL DEFAULT 0,
-  `publishedon` int(20) NOT NULL DEFAULT 0 COMMENT 'Date the document was published',
-  `publishedby` int(10) NOT NULL DEFAULT 0 COMMENT 'ID of user who published the document',
+  `published` int(1) NOT NULL DEFAULT '0',
+  `pub_date` int(20) NOT NULL DEFAULT '0',
+  `unpub_date` int(20) NOT NULL DEFAULT '0',
+  `parent` int(10) NOT NULL DEFAULT '0',
+  `isfolder` int(1) NOT NULL DEFAULT '0',
+  `introtext` text COMMENT 'Used to provide quick summary of the document',
+  `content` mediumtext,
+  `richtext` tinyint(1) NOT NULL DEFAULT '1',
+  `template` int(10) NOT NULL DEFAULT '0',
+  `menuindex` int(10) NOT NULL DEFAULT '0',
+  `searchable` int(1) NOT NULL DEFAULT '1',
+  `cacheable` int(1) NOT NULL DEFAULT '1',
+  `createdby` int(10) NOT NULL DEFAULT '0',
+  `createdon` int(20) NOT NULL DEFAULT '0',
+  `editedby` int(10) NOT NULL DEFAULT '0',
+  `editedon` int(20) NOT NULL DEFAULT '0',
+  `deleted` int(1) NOT NULL DEFAULT '0',
+  `deletedon` int(20) NOT NULL DEFAULT '0',
+  `deletedby` int(10) NOT NULL DEFAULT '0',
+  `publishedon` int(20) NOT NULL DEFAULT '0' COMMENT 'Date the document was published',
+  `publishedby` int(10) NOT NULL DEFAULT '0' COMMENT 'ID of user who published the document',
   `menutitle` varchar(255) NOT NULL DEFAULT '' COMMENT 'Menu title',
-  `donthit` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'Disable page hit count',
-  `privateweb` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'Private web document',
-  `privatemgr` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'Private manager document',
-  `content_dispo` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0-inline, 1-attachment',
-  `hidemenu` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'Hide document from menu',
-  `alias_visible` int(2) NOT NULL DEFAULT 1,
+  `donthit` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Disable page hit count',
+  `privateweb` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Private web document',
+  `privatemgr` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Private manager document',
+  `content_dispo` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0-inline, 1-attachment',
+  `hidemenu` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Hide document from menu',
+  `alias_visible` int(2) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   KEY `id` (`id`),
   KEY `parent` (`parent`),
@@ -331,15 +331,15 @@ CREATE TABLE `evo_site_htmlsnippets` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL DEFAULT '',
   `description` varchar(255) NOT NULL DEFAULT 'Chunk',
-  `editor_type` int(11) NOT NULL DEFAULT 0 COMMENT '0-plain text,1-rich text,2-code editor',
+  `editor_type` int(11) NOT NULL DEFAULT '0' COMMENT '0-plain text,1-rich text,2-code editor',
   `editor_name` varchar(50) NOT NULL DEFAULT 'none',
-  `category` int(11) NOT NULL DEFAULT 0 COMMENT 'category id',
-  `cache_type` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'Cache option',
-  `snippet` mediumtext DEFAULT NULL,
-  `locked` tinyint(4) NOT NULL DEFAULT 0,
-  `createdon` int(11) NOT NULL DEFAULT 0,
-  `editedon` int(11) NOT NULL DEFAULT 0,
-  `disabled` tinyint(4) NOT NULL DEFAULT 0 COMMENT 'Disables the snippet',
+  `category` int(11) NOT NULL DEFAULT '0' COMMENT 'category id',
+  `cache_type` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Cache option',
+  `snippet` mediumtext,
+  `locked` tinyint(4) NOT NULL DEFAULT '0',
+  `createdon` int(11) NOT NULL DEFAULT '0',
+  `editedon` int(11) NOT NULL DEFAULT '0',
+  `disabled` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'Disables the snippet',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='Contains the site chunks.';
 
@@ -354,8 +354,8 @@ CREATE TABLE `evo_site_htmlsnippets` (
 DROP TABLE IF EXISTS `evo_site_module_access`;
 CREATE TABLE `evo_site_module_access` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `module` int(11) NOT NULL DEFAULT 0,
-  `usergroup` int(11) NOT NULL DEFAULT 0,
+  `module` int(11) NOT NULL DEFAULT '0',
+  `usergroup` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Module users group access permission';
 
@@ -370,9 +370,9 @@ CREATE TABLE `evo_site_module_access` (
 DROP TABLE IF EXISTS `evo_site_module_depobj`;
 CREATE TABLE `evo_site_module_depobj` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `module` int(11) NOT NULL DEFAULT 0,
-  `resource` int(11) NOT NULL DEFAULT 0,
-  `type` int(2) NOT NULL DEFAULT 0 COMMENT '10-chunks, 20-docs, 30-plugins, 40-snips, 50-tpls, 60-tvs',
+  `module` int(11) NOT NULL DEFAULT '0',
+  `resource` int(11) NOT NULL DEFAULT '0',
+  `type` int(2) NOT NULL DEFAULT '0' COMMENT '10-chunks, 20-docs, 30-plugins, 40-snips, 50-tpls, 60-tvs',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='Module Dependencies';
 
@@ -389,20 +389,20 @@ CREATE TABLE `evo_site_modules` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL DEFAULT '',
   `description` varchar(255) NOT NULL DEFAULT '0',
-  `editor_type` int(11) NOT NULL DEFAULT 0 COMMENT '0-plain text,1-rich text,2-code editor',
-  `disabled` tinyint(4) NOT NULL DEFAULT 0,
-  `category` int(11) NOT NULL DEFAULT 0 COMMENT 'category id',
-  `wrap` tinyint(4) NOT NULL DEFAULT 0,
-  `locked` tinyint(4) NOT NULL DEFAULT 0,
+  `editor_type` int(11) NOT NULL DEFAULT '0' COMMENT '0-plain text,1-rich text,2-code editor',
+  `disabled` tinyint(4) NOT NULL DEFAULT '0',
+  `category` int(11) NOT NULL DEFAULT '0' COMMENT 'category id',
+  `wrap` tinyint(4) NOT NULL DEFAULT '0',
+  `locked` tinyint(4) NOT NULL DEFAULT '0',
   `icon` varchar(255) NOT NULL DEFAULT '' COMMENT 'url to module icon',
-  `enable_resource` tinyint(4) NOT NULL DEFAULT 0 COMMENT 'enables the resource file feature',
+  `enable_resource` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'enables the resource file feature',
   `resourcefile` varchar(255) NOT NULL DEFAULT '' COMMENT 'a physical link to a resource file',
-  `createdon` int(11) NOT NULL DEFAULT 0,
-  `editedon` int(11) NOT NULL DEFAULT 0,
+  `createdon` int(11) NOT NULL DEFAULT '0',
+  `editedon` int(11) NOT NULL DEFAULT '0',
   `guid` varchar(32) NOT NULL DEFAULT '' COMMENT 'globally unique identifier',
-  `enable_sharedparams` tinyint(4) NOT NULL DEFAULT 0,
-  `properties` text DEFAULT NULL,
-  `modulecode` mediumtext DEFAULT NULL COMMENT 'module boot up code',
+  `enable_sharedparams` tinyint(4) NOT NULL DEFAULT '0',
+  `properties` text,
+  `modulecode` mediumtext COMMENT 'module boot up code',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='Site Modules';
 
@@ -417,8 +417,8 @@ CREATE TABLE `evo_site_modules` (
 DROP TABLE IF EXISTS `evo_site_plugin_events`;
 CREATE TABLE `evo_site_plugin_events` (
   `pluginid` int(10) NOT NULL,
-  `evtid` int(10) NOT NULL DEFAULT 0,
-  `priority` int(10) NOT NULL DEFAULT 0 COMMENT 'determines plugin run order',
+  `evtid` int(10) NOT NULL DEFAULT '0',
+  `priority` int(10) NOT NULL DEFAULT '0' COMMENT 'determines plugin run order',
   PRIMARY KEY (`pluginid`,`evtid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Links to system events';
 
@@ -435,16 +435,16 @@ CREATE TABLE `evo_site_plugins` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL DEFAULT '',
   `description` varchar(255) NOT NULL DEFAULT 'Plugin',
-  `editor_type` int(11) NOT NULL DEFAULT 0 COMMENT '0-plain text,1-rich text,2-code editor',
-  `category` int(11) NOT NULL DEFAULT 0 COMMENT 'category id',
-  `cache_type` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'Cache option',
-  `plugincode` mediumtext DEFAULT NULL,
-  `locked` tinyint(4) NOT NULL DEFAULT 0,
-  `properties` text DEFAULT NULL COMMENT 'Default Properties',
-  `disabled` tinyint(4) NOT NULL DEFAULT 0 COMMENT 'Disables the plugin',
+  `editor_type` int(11) NOT NULL DEFAULT '0' COMMENT '0-plain text,1-rich text,2-code editor',
+  `category` int(11) NOT NULL DEFAULT '0' COMMENT 'category id',
+  `cache_type` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Cache option',
+  `plugincode` mediumtext,
+  `locked` tinyint(4) NOT NULL DEFAULT '0',
+  `properties` text COMMENT 'Default Properties',
+  `disabled` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'Disables the plugin',
   `moduleguid` varchar(32) NOT NULL DEFAULT '' COMMENT 'GUID of module from which to import shared parameters',
-  `createdon` int(11) NOT NULL DEFAULT 0,
-  `editedon` int(11) NOT NULL DEFAULT 0,
+  `createdon` int(11) NOT NULL DEFAULT '0',
+  `editedon` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COMMENT='Contains the site plugins.';
 
@@ -461,16 +461,16 @@ CREATE TABLE `evo_site_snippets` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL DEFAULT '',
   `description` varchar(255) NOT NULL DEFAULT 'Snippet',
-  `editor_type` int(11) NOT NULL DEFAULT 0 COMMENT '0-plain text,1-rich text,2-code editor',
-  `category` int(11) NOT NULL DEFAULT 0 COMMENT 'category id',
-  `cache_type` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'Cache option',
-  `snippet` mediumtext DEFAULT NULL,
-  `locked` tinyint(4) NOT NULL DEFAULT 0,
-  `properties` text DEFAULT NULL COMMENT 'Default Properties',
+  `editor_type` int(11) NOT NULL DEFAULT '0' COMMENT '0-plain text,1-rich text,2-code editor',
+  `category` int(11) NOT NULL DEFAULT '0' COMMENT 'category id',
+  `cache_type` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Cache option',
+  `snippet` mediumtext,
+  `locked` tinyint(4) NOT NULL DEFAULT '0',
+  `properties` text COMMENT 'Default Properties',
   `moduleguid` varchar(32) NOT NULL DEFAULT '' COMMENT 'GUID of module from which to import shared parameters',
-  `createdon` int(11) NOT NULL DEFAULT 0,
-  `editedon` int(11) NOT NULL DEFAULT 0,
-  `disabled` tinyint(4) NOT NULL DEFAULT 0 COMMENT 'Disables the snippet',
+  `createdon` int(11) NOT NULL DEFAULT '0',
+  `editedon` int(11) NOT NULL DEFAULT '0',
+  `disabled` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'Disables the snippet',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COMMENT='Contains the site snippets.';
 
@@ -488,15 +488,15 @@ CREATE TABLE `evo_site_templates` (
   `templatename` varchar(100) NOT NULL DEFAULT '',
   `templatealias` varchar(255) DEFAULT NULL,
   `description` varchar(255) NOT NULL DEFAULT 'Template',
-  `editor_type` int(11) NOT NULL DEFAULT 0 COMMENT '0-plain text,1-rich text,2-code editor',
-  `category` int(11) NOT NULL DEFAULT 0 COMMENT 'category id',
+  `editor_type` int(11) NOT NULL DEFAULT '0' COMMENT '0-plain text,1-rich text,2-code editor',
+  `category` int(11) NOT NULL DEFAULT '0' COMMENT 'category id',
   `icon` varchar(255) NOT NULL DEFAULT '' COMMENT 'url to icon file',
-  `template_type` int(11) NOT NULL DEFAULT 0 COMMENT '0-page,1-content',
-  `content` mediumtext DEFAULT NULL,
-  `locked` tinyint(4) NOT NULL DEFAULT 0,
-  `selectable` tinyint(4) NOT NULL DEFAULT 1,
-  `createdon` int(11) NOT NULL DEFAULT 0,
-  `editedon` int(11) NOT NULL DEFAULT 0,
+  `template_type` int(11) NOT NULL DEFAULT '0' COMMENT '0-page,1-content',
+  `content` mediumtext,
+  `locked` tinyint(4) NOT NULL DEFAULT '0',
+  `selectable` tinyint(4) NOT NULL DEFAULT '1',
+  `createdon` int(11) NOT NULL DEFAULT '0',
+  `editedon` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COMMENT='Contains the site templates.';
 
@@ -511,8 +511,8 @@ CREATE TABLE `evo_site_templates` (
 DROP TABLE IF EXISTS `evo_site_tmplvar_access`;
 CREATE TABLE `evo_site_tmplvar_access` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
-  `tmplvarid` int(10) NOT NULL DEFAULT 0,
-  `documentgroup` int(10) NOT NULL DEFAULT 0,
+  `tmplvarid` int(10) NOT NULL DEFAULT '0',
+  `documentgroup` int(10) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Contains data used for template variable access permissions.';
 
@@ -527,9 +527,9 @@ CREATE TABLE `evo_site_tmplvar_access` (
 DROP TABLE IF EXISTS `evo_site_tmplvar_contentvalues`;
 CREATE TABLE `evo_site_tmplvar_contentvalues` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `tmplvarid` int(10) NOT NULL DEFAULT 0 COMMENT 'Template Variable id',
-  `contentid` int(10) NOT NULL DEFAULT 0 COMMENT 'Site Content Id',
-  `value` mediumtext DEFAULT NULL,
+  `tmplvarid` int(10) NOT NULL DEFAULT '0' COMMENT 'Template Variable id',
+  `contentid` int(10) NOT NULL DEFAULT '0' COMMENT 'Site Content Id',
+  `value` mediumtext,
   PRIMARY KEY (`id`),
   UNIQUE KEY `ix_tvid_contentid` (`tmplvarid`,`contentid`),
   KEY `idx_tmplvarid` (`tmplvarid`),
@@ -547,9 +547,9 @@ CREATE TABLE `evo_site_tmplvar_contentvalues` (
 
 DROP TABLE IF EXISTS `evo_site_tmplvar_templates`;
 CREATE TABLE `evo_site_tmplvar_templates` (
-  `tmplvarid` int(10) NOT NULL DEFAULT 0 COMMENT 'Template Variable id',
-  `templateid` int(11) NOT NULL DEFAULT 0,
-  `rank` int(11) NOT NULL DEFAULT 0,
+  `tmplvarid` int(10) NOT NULL DEFAULT '0' COMMENT 'Template Variable id',
+  `templateid` int(11) NOT NULL DEFAULT '0',
+  `rank` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`tmplvarid`,`templateid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Site Template Variables Templates Link Table';
 
@@ -568,16 +568,16 @@ CREATE TABLE `evo_site_tmplvars` (
   `name` varchar(50) NOT NULL DEFAULT '',
   `caption` varchar(80) NOT NULL DEFAULT '',
   `description` varchar(255) NOT NULL DEFAULT '',
-  `editor_type` int(11) NOT NULL DEFAULT 0 COMMENT '0-plain text,1-rich text,2-code editor',
-  `category` int(11) NOT NULL DEFAULT 0 COMMENT 'category id',
-  `locked` tinyint(4) NOT NULL DEFAULT 0,
-  `elements` text DEFAULT NULL,
-  `rank` int(11) NOT NULL DEFAULT 0,
+  `editor_type` int(11) NOT NULL DEFAULT '0' COMMENT '0-plain text,1-rich text,2-code editor',
+  `category` int(11) NOT NULL DEFAULT '0' COMMENT 'category id',
+  `locked` tinyint(4) NOT NULL DEFAULT '0',
+  `elements` text,
+  `rank` int(11) NOT NULL DEFAULT '0',
   `display` varchar(20) NOT NULL DEFAULT '' COMMENT 'Display Control',
-  `display_params` text DEFAULT NULL COMMENT 'Display Control Properties',
-  `default_text` text DEFAULT NULL,
-  `createdon` int(11) NOT NULL DEFAULT 0,
-  `editedon` int(11) NOT NULL DEFAULT 0,
+  `display_params` text COMMENT 'Display Control Properties',
+  `default_text` text,
+  `createdon` int(11) NOT NULL DEFAULT '0',
+  `editedon` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `indx_rank` (`rank`)
 ) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='Site Template Variables';
@@ -594,7 +594,7 @@ DROP TABLE IF EXISTS `evo_system_eventnames`;
 CREATE TABLE `evo_system_eventnames` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL DEFAULT '',
-  `service` tinyint(4) NOT NULL DEFAULT 0 COMMENT 'System Service number',
+  `service` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'System Service number',
   `groupname` varchar(20) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
@@ -611,7 +611,7 @@ CREATE TABLE `evo_system_eventnames` (
 DROP TABLE IF EXISTS `evo_system_settings`;
 CREATE TABLE `evo_system_settings` (
   `setting_name` varchar(50) NOT NULL DEFAULT '',
-  `setting_value` text DEFAULT NULL,
+  `setting_value` text,
   PRIMARY KEY (`setting_name`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Contains Content Manager settings.';
 
@@ -626,22 +626,22 @@ CREATE TABLE `evo_system_settings` (
 DROP TABLE IF EXISTS `evo_user_attributes`;
 CREATE TABLE `evo_user_attributes` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
-  `internalKey` int(10) NOT NULL DEFAULT 0,
+  `internalKey` int(10) NOT NULL DEFAULT '0',
   `fullname` varchar(100) NOT NULL DEFAULT '',
-  `role` int(10) NOT NULL DEFAULT 0,
+  `role` int(10) NOT NULL DEFAULT '0',
   `email` varchar(100) NOT NULL DEFAULT '',
   `phone` varchar(100) NOT NULL DEFAULT '',
   `mobilephone` varchar(100) NOT NULL DEFAULT '',
-  `blocked` int(1) NOT NULL DEFAULT 0,
-  `blockeduntil` int(11) NOT NULL DEFAULT 0,
-  `blockedafter` int(11) NOT NULL DEFAULT 0,
-  `logincount` int(11) NOT NULL DEFAULT 0,
-  `lastlogin` int(11) NOT NULL DEFAULT 0,
-  `thislogin` int(11) NOT NULL DEFAULT 0,
-  `failedlogincount` int(10) NOT NULL DEFAULT 0,
+  `blocked` int(1) NOT NULL DEFAULT '0',
+  `blockeduntil` int(11) NOT NULL DEFAULT '0',
+  `blockedafter` int(11) NOT NULL DEFAULT '0',
+  `logincount` int(11) NOT NULL DEFAULT '0',
+  `lastlogin` int(11) NOT NULL DEFAULT '0',
+  `thislogin` int(11) NOT NULL DEFAULT '0',
+  `failedlogincount` int(10) NOT NULL DEFAULT '0',
   `sessionid` varchar(100) NOT NULL DEFAULT '',
-  `dob` int(10) NOT NULL DEFAULT 0,
-  `gender` int(1) NOT NULL DEFAULT 0 COMMENT '0 - unknown, 1 - Male 2 - female',
+  `dob` int(10) NOT NULL DEFAULT '0',
+  `gender` int(1) NOT NULL DEFAULT '0' COMMENT '0 - unknown, 1 - Male 2 - female',
   `country` varchar(5) NOT NULL DEFAULT '',
   `street` varchar(255) NOT NULL DEFAULT '',
   `city` varchar(255) NOT NULL DEFAULT '',
@@ -649,10 +649,10 @@ CREATE TABLE `evo_user_attributes` (
   `zip` varchar(25) NOT NULL DEFAULT '',
   `fax` varchar(100) NOT NULL DEFAULT '',
   `photo` varchar(255) NOT NULL DEFAULT '' COMMENT 'link to photo',
-  `comment` text DEFAULT NULL,
-  `createdon` int(11) NOT NULL DEFAULT 0,
-  `editedon` int(11) NOT NULL DEFAULT 0,
-  `verified` int(1) NOT NULL DEFAULT 1,
+  `comment` text,
+  `createdon` int(11) NOT NULL DEFAULT '0',
+  `editedon` int(11) NOT NULL DEFAULT '0',
+  `verified` int(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   KEY `userid` (`internalKey`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='Contains information about the backend users.';
@@ -670,12 +670,12 @@ CREATE TABLE `evo_user_messages` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `type` varchar(15) NOT NULL DEFAULT '',
   `subject` varchar(60) NOT NULL DEFAULT '',
-  `message` text DEFAULT NULL,
-  `sender` int(10) NOT NULL DEFAULT 0,
-  `recipient` int(10) NOT NULL DEFAULT 0,
-  `private` tinyint(4) NOT NULL DEFAULT 0,
-  `postdate` int(20) NOT NULL DEFAULT 0,
-  `messageread` tinyint(1) NOT NULL DEFAULT 0,
+  `message` text,
+  `sender` int(10) NOT NULL DEFAULT '0',
+  `recipient` int(10) NOT NULL DEFAULT '0',
+  `private` tinyint(4) NOT NULL DEFAULT '0',
+  `postdate` int(20) NOT NULL DEFAULT '0',
+  `messageread` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Contains messages for the Content Manager messaging system.';
 
@@ -692,77 +692,77 @@ CREATE TABLE `evo_user_roles` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL DEFAULT '',
   `description` varchar(255) NOT NULL DEFAULT '',
-  `frames` int(1) NOT NULL DEFAULT 0,
-  `home` int(1) NOT NULL DEFAULT 0,
-  `view_document` int(1) NOT NULL DEFAULT 0,
-  `new_document` int(1) NOT NULL DEFAULT 0,
-  `save_document` int(1) NOT NULL DEFAULT 0,
-  `publish_document` int(1) NOT NULL DEFAULT 0,
-  `delete_document` int(1) NOT NULL DEFAULT 0,
-  `empty_trash` int(1) NOT NULL DEFAULT 0,
-  `action_ok` int(1) NOT NULL DEFAULT 0,
-  `logout` int(1) NOT NULL DEFAULT 0,
-  `help` int(1) NOT NULL DEFAULT 0,
-  `messages` int(1) NOT NULL DEFAULT 0,
-  `new_user` int(1) NOT NULL DEFAULT 0,
-  `edit_user` int(1) NOT NULL DEFAULT 0,
-  `logs` int(1) NOT NULL DEFAULT 0,
-  `edit_parser` int(1) NOT NULL DEFAULT 0,
-  `save_parser` int(1) NOT NULL DEFAULT 0,
-  `edit_template` int(1) NOT NULL DEFAULT 0,
-  `settings` int(1) NOT NULL DEFAULT 0,
-  `credits` int(1) NOT NULL DEFAULT 0,
-  `new_template` int(1) NOT NULL DEFAULT 0,
-  `save_template` int(1) NOT NULL DEFAULT 0,
-  `delete_template` int(1) NOT NULL DEFAULT 0,
-  `edit_snippet` int(1) NOT NULL DEFAULT 0,
-  `new_snippet` int(1) NOT NULL DEFAULT 0,
-  `save_snippet` int(1) NOT NULL DEFAULT 0,
-  `delete_snippet` int(1) NOT NULL DEFAULT 0,
-  `edit_chunk` int(1) NOT NULL DEFAULT 0,
-  `new_chunk` int(1) NOT NULL DEFAULT 0,
-  `save_chunk` int(1) NOT NULL DEFAULT 0,
-  `delete_chunk` int(1) NOT NULL DEFAULT 0,
-  `empty_cache` int(1) NOT NULL DEFAULT 0,
-  `edit_document` int(1) NOT NULL DEFAULT 0,
-  `change_password` int(1) NOT NULL DEFAULT 0,
-  `error_dialog` int(1) NOT NULL DEFAULT 0,
-  `about` int(1) NOT NULL DEFAULT 0,
-  `category_manager` int(1) NOT NULL DEFAULT 0,
-  `file_manager` int(1) NOT NULL DEFAULT 0,
-  `assets_files` int(1) NOT NULL DEFAULT 0,
-  `assets_images` int(1) NOT NULL DEFAULT 0,
-  `save_user` int(1) NOT NULL DEFAULT 0,
-  `delete_user` int(1) NOT NULL DEFAULT 0,
-  `save_password` int(11) NOT NULL DEFAULT 0,
-  `edit_role` int(1) NOT NULL DEFAULT 0,
-  `save_role` int(1) NOT NULL DEFAULT 0,
-  `delete_role` int(1) NOT NULL DEFAULT 0,
-  `new_role` int(1) NOT NULL DEFAULT 0,
-  `access_permissions` int(1) NOT NULL DEFAULT 0,
-  `bk_manager` int(1) NOT NULL DEFAULT 0,
-  `new_plugin` int(1) NOT NULL DEFAULT 0,
-  `edit_plugin` int(1) NOT NULL DEFAULT 0,
-  `save_plugin` int(1) NOT NULL DEFAULT 0,
-  `delete_plugin` int(1) NOT NULL DEFAULT 0,
-  `new_module` int(1) NOT NULL DEFAULT 0,
-  `edit_module` int(1) NOT NULL DEFAULT 0,
-  `save_module` int(1) NOT NULL DEFAULT 0,
-  `delete_module` int(1) NOT NULL DEFAULT 0,
-  `exec_module` int(1) NOT NULL DEFAULT 0,
-  `view_eventlog` int(1) NOT NULL DEFAULT 0,
-  `delete_eventlog` int(1) NOT NULL DEFAULT 0,
-  `new_web_user` int(1) NOT NULL DEFAULT 0,
-  `edit_web_user` int(1) NOT NULL DEFAULT 0,
-  `save_web_user` int(1) NOT NULL DEFAULT 0,
-  `delete_web_user` int(1) NOT NULL DEFAULT 0,
-  `web_access_permissions` int(1) NOT NULL DEFAULT 0,
-  `view_unpublished` int(1) NOT NULL DEFAULT 0,
-  `import_static` int(1) NOT NULL DEFAULT 0,
-  `export_static` int(1) NOT NULL DEFAULT 0,
-  `remove_locks` int(1) NOT NULL DEFAULT 0,
-  `display_locks` int(1) NOT NULL DEFAULT 0,
-  `change_resourcetype` int(1) NOT NULL DEFAULT 0,
+  `frames` int(1) NOT NULL DEFAULT '0',
+  `home` int(1) NOT NULL DEFAULT '0',
+  `view_document` int(1) NOT NULL DEFAULT '0',
+  `new_document` int(1) NOT NULL DEFAULT '0',
+  `save_document` int(1) NOT NULL DEFAULT '0',
+  `publish_document` int(1) NOT NULL DEFAULT '0',
+  `delete_document` int(1) NOT NULL DEFAULT '0',
+  `empty_trash` int(1) NOT NULL DEFAULT '0',
+  `action_ok` int(1) NOT NULL DEFAULT '0',
+  `logout` int(1) NOT NULL DEFAULT '0',
+  `help` int(1) NOT NULL DEFAULT '0',
+  `messages` int(1) NOT NULL DEFAULT '0',
+  `new_user` int(1) NOT NULL DEFAULT '0',
+  `edit_user` int(1) NOT NULL DEFAULT '0',
+  `logs` int(1) NOT NULL DEFAULT '0',
+  `edit_parser` int(1) NOT NULL DEFAULT '0',
+  `save_parser` int(1) NOT NULL DEFAULT '0',
+  `edit_template` int(1) NOT NULL DEFAULT '0',
+  `settings` int(1) NOT NULL DEFAULT '0',
+  `credits` int(1) NOT NULL DEFAULT '0',
+  `new_template` int(1) NOT NULL DEFAULT '0',
+  `save_template` int(1) NOT NULL DEFAULT '0',
+  `delete_template` int(1) NOT NULL DEFAULT '0',
+  `edit_snippet` int(1) NOT NULL DEFAULT '0',
+  `new_snippet` int(1) NOT NULL DEFAULT '0',
+  `save_snippet` int(1) NOT NULL DEFAULT '0',
+  `delete_snippet` int(1) NOT NULL DEFAULT '0',
+  `edit_chunk` int(1) NOT NULL DEFAULT '0',
+  `new_chunk` int(1) NOT NULL DEFAULT '0',
+  `save_chunk` int(1) NOT NULL DEFAULT '0',
+  `delete_chunk` int(1) NOT NULL DEFAULT '0',
+  `empty_cache` int(1) NOT NULL DEFAULT '0',
+  `edit_document` int(1) NOT NULL DEFAULT '0',
+  `change_password` int(1) NOT NULL DEFAULT '0',
+  `error_dialog` int(1) NOT NULL DEFAULT '0',
+  `about` int(1) NOT NULL DEFAULT '0',
+  `category_manager` int(1) NOT NULL DEFAULT '0',
+  `file_manager` int(1) NOT NULL DEFAULT '0',
+  `assets_files` int(1) NOT NULL DEFAULT '0',
+  `assets_images` int(1) NOT NULL DEFAULT '0',
+  `save_user` int(1) NOT NULL DEFAULT '0',
+  `delete_user` int(1) NOT NULL DEFAULT '0',
+  `save_password` int(11) NOT NULL DEFAULT '0',
+  `edit_role` int(1) NOT NULL DEFAULT '0',
+  `save_role` int(1) NOT NULL DEFAULT '0',
+  `delete_role` int(1) NOT NULL DEFAULT '0',
+  `new_role` int(1) NOT NULL DEFAULT '0',
+  `access_permissions` int(1) NOT NULL DEFAULT '0',
+  `bk_manager` int(1) NOT NULL DEFAULT '0',
+  `new_plugin` int(1) NOT NULL DEFAULT '0',
+  `edit_plugin` int(1) NOT NULL DEFAULT '0',
+  `save_plugin` int(1) NOT NULL DEFAULT '0',
+  `delete_plugin` int(1) NOT NULL DEFAULT '0',
+  `new_module` int(1) NOT NULL DEFAULT '0',
+  `edit_module` int(1) NOT NULL DEFAULT '0',
+  `save_module` int(1) NOT NULL DEFAULT '0',
+  `delete_module` int(1) NOT NULL DEFAULT '0',
+  `exec_module` int(1) NOT NULL DEFAULT '0',
+  `view_eventlog` int(1) NOT NULL DEFAULT '0',
+  `delete_eventlog` int(1) NOT NULL DEFAULT '0',
+  `new_web_user` int(1) NOT NULL DEFAULT '0',
+  `edit_web_user` int(1) NOT NULL DEFAULT '0',
+  `save_web_user` int(1) NOT NULL DEFAULT '0',
+  `delete_web_user` int(1) NOT NULL DEFAULT '0',
+  `web_access_permissions` int(1) NOT NULL DEFAULT '0',
+  `view_unpublished` int(1) NOT NULL DEFAULT '0',
+  `import_static` int(1) NOT NULL DEFAULT '0',
+  `export_static` int(1) NOT NULL DEFAULT '0',
+  `remove_locks` int(1) NOT NULL DEFAULT '0',
+  `display_locks` int(1) NOT NULL DEFAULT '0',
+  `change_resourcetype` int(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='Contains information describing the user roles.';
 
@@ -778,7 +778,7 @@ DROP TABLE IF EXISTS `evo_user_settings`;
 CREATE TABLE `evo_user_settings` (
   `user` int(11) NOT NULL,
   `setting_name` varchar(50) NOT NULL DEFAULT '',
-  `setting_value` text DEFAULT NULL,
+  `setting_value` text,
   PRIMARY KEY (`user`,`setting_name`),
   KEY `setting_name` (`setting_name`),
   KEY `user` (`user`)
@@ -795,8 +795,8 @@ CREATE TABLE `evo_user_settings` (
 DROP TABLE IF EXISTS `evo_web_groups`;
 CREATE TABLE `evo_web_groups` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
-  `webgroup` int(10) NOT NULL DEFAULT 0,
-  `webuser` int(10) NOT NULL DEFAULT 0,
+  `webgroup` int(10) NOT NULL DEFAULT '0',
+  `webuser` int(10) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `ix_group_user` (`webgroup`,`webuser`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Contains data used for web access permissions.';
@@ -812,22 +812,22 @@ CREATE TABLE `evo_web_groups` (
 DROP TABLE IF EXISTS `evo_web_user_attributes`;
 CREATE TABLE `evo_web_user_attributes` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
-  `internalKey` int(10) NOT NULL DEFAULT 0,
+  `internalKey` int(10) NOT NULL DEFAULT '0',
   `fullname` varchar(100) NOT NULL DEFAULT '',
-  `role` int(10) NOT NULL DEFAULT 0,
+  `role` int(10) NOT NULL DEFAULT '0',
   `email` varchar(100) NOT NULL DEFAULT '',
   `phone` varchar(100) NOT NULL DEFAULT '',
   `mobilephone` varchar(100) NOT NULL DEFAULT '',
-  `blocked` int(1) NOT NULL DEFAULT 0,
-  `blockeduntil` int(11) NOT NULL DEFAULT 0,
-  `blockedafter` int(11) NOT NULL DEFAULT 0,
-  `logincount` int(11) NOT NULL DEFAULT 0,
-  `lastlogin` int(11) NOT NULL DEFAULT 0,
-  `thislogin` int(11) NOT NULL DEFAULT 0,
-  `failedlogincount` int(10) NOT NULL DEFAULT 0,
+  `blocked` int(1) NOT NULL DEFAULT '0',
+  `blockeduntil` int(11) NOT NULL DEFAULT '0',
+  `blockedafter` int(11) NOT NULL DEFAULT '0',
+  `logincount` int(11) NOT NULL DEFAULT '0',
+  `lastlogin` int(11) NOT NULL DEFAULT '0',
+  `thislogin` int(11) NOT NULL DEFAULT '0',
+  `failedlogincount` int(10) NOT NULL DEFAULT '0',
   `sessionid` varchar(100) NOT NULL DEFAULT '',
-  `dob` int(10) NOT NULL DEFAULT 0,
-  `gender` int(1) NOT NULL DEFAULT 0 COMMENT '0 - unknown, 1 - Male 2 - female',
+  `dob` int(10) NOT NULL DEFAULT '0',
+  `gender` int(1) NOT NULL DEFAULT '0' COMMENT '0 - unknown, 1 - Male 2 - female',
   `country` varchar(25) NOT NULL DEFAULT '',
   `street` varchar(255) NOT NULL DEFAULT '',
   `city` varchar(255) NOT NULL DEFAULT '',
@@ -835,10 +835,10 @@ CREATE TABLE `evo_web_user_attributes` (
   `zip` varchar(25) NOT NULL DEFAULT '',
   `fax` varchar(100) NOT NULL DEFAULT '',
   `photo` varchar(255) NOT NULL DEFAULT '' COMMENT 'link to photo',
-  `comment` text DEFAULT NULL,
-  `createdon` int(11) NOT NULL DEFAULT 0,
-  `editedon` int(11) NOT NULL DEFAULT 0,
-  `verified` int(1) NOT NULL DEFAULT 0,
+  `comment` text,
+  `createdon` int(11) NOT NULL DEFAULT '0',
+  `editedon` int(11) NOT NULL DEFAULT '0',
+  `verified` int(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `userid` (`internalKey`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Contains information for web users.';
@@ -855,7 +855,7 @@ DROP TABLE IF EXISTS `evo_web_user_settings`;
 CREATE TABLE `evo_web_user_settings` (
   `webuser` int(11) NOT NULL,
   `setting_name` varchar(50) NOT NULL DEFAULT '',
-  `setting_value` text DEFAULT NULL,
+  `setting_value` text,
   PRIMARY KEY (`webuser`,`setting_name`),
   KEY `setting_name` (`setting_name`),
   KEY `webuserid` (`webuser`)
@@ -890,8 +890,8 @@ CREATE TABLE `evo_web_users` (
 DROP TABLE IF EXISTS `evo_webgroup_access`;
 CREATE TABLE `evo_webgroup_access` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
-  `webgroup` int(10) NOT NULL DEFAULT 0,
-  `documentgroup` int(10) NOT NULL DEFAULT 0,
+  `webgroup` int(10) NOT NULL DEFAULT '0',
+  `documentgroup` int(10) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Contains data used for web access permissions.';
 
@@ -921,7 +921,7 @@ CREATE TABLE `evo_webgroup_names` (
 #
 
 INSERT INTO `evo_active_user_sessions` VALUES
-  ('7to3umrg6s5gl111pig9rdpgm1f29pl2','1','1671733421','127.0.0.1');
+  ('umtdm374b24o5i3rl29p85r6d4d4310c','1','1671832635','127.0.0.1');
 
 #
 # Dumping data for table `evo_active_users`
@@ -930,7 +930,8 @@ INSERT INTO `evo_active_user_sessions` VALUES
 INSERT INTO `evo_active_users` VALUES
   ('kpotpi7o8ur4uqmkkcdpmlumil67u3j0','1','ProjectSoft','1671711021','93',NULL),
   ('q823lnsd74b86h7h18pjpfe2qvv3m1pg','1','ProjectSoft','1671654772','8',NULL),
-  ('7to3umrg6s5gl111pig9rdpgm1f29pl2','1','ProjectSoft','1671733421','93',NULL);
+  ('7to3umrg6s5gl111pig9rdpgm1f29pl2','1','ProjectSoft','1671733421','93',NULL),
+  ('umtdm374b24o5i3rl29p85r6d4d4310c','1','ProjectSoft','1671832635','93',NULL);
 
 #
 # Dumping data for table `evo_categories`
@@ -961,26 +962,8 @@ INSERT INTO `evo_categories` VALUES
 #
 
 INSERT INTO `evo_manager_log` VALUES
-  ('1','1671711017','1','ProjectSoft','54','-','evo_manager_log','Optimizing a table','127.0.0.1','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36 OPR/94.0.0.0'),
-  ('2','1671711017','1','ProjectSoft','93','-','-','Backup Manager','127.0.0.1','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36 OPR/94.0.0.0'),
-  ('3','1671726244','1','ProjectSoft','93','-','-','Backup Manager','127.0.0.1','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.102 Safari/537.36 OPR/90.0.4480.84'),
-  ('4','1671726253','1','ProjectSoft','17','-','-','Editing settings','127.0.0.1','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.102 Safari/537.36 OPR/90.0.4480.84'),
-  ('5','1671726256','1','ProjectSoft','30','-','-','Saving settings','127.0.0.1','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.102 Safari/537.36 OPR/90.0.4480.84'),
-  ('6','1671726263','1','ProjectSoft','17','-','-','Editing settings','127.0.0.1','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.102 Safari/537.36 OPR/90.0.4480.84'),
-  ('7','1671729504','1','ProjectSoft','27','1','Главная','Editing resource','127.0.0.1','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.102 Safari/537.36 OPR/90.0.4480.84'),
-  ('8','1671729524','1','ProjectSoft','5','1','Главная','Saving resource','127.0.0.1','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.102 Safari/537.36 OPR/90.0.4480.84'),
-  ('9','1671729524','1','ProjectSoft','27','1','Главная','Editing resource','127.0.0.1','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.102 Safari/537.36 OPR/90.0.4480.84'),
-  ('10','1671729536','1','ProjectSoft','5','1','Главная','Saving resource','127.0.0.1','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.102 Safari/537.36 OPR/90.0.4480.84'),
-  ('11','1671729536','1','ProjectSoft','27','1','Главная','Editing resource','127.0.0.1','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.102 Safari/537.36 OPR/90.0.4480.84'),
-  ('12','1671729564','1','ProjectSoft','5','1','Главная','Saving resource','127.0.0.1','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.102 Safari/537.36 OPR/90.0.4480.84'),
-  ('13','1671729564','1','ProjectSoft','27','1','Главная','Editing resource','127.0.0.1','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.102 Safari/537.36 OPR/90.0.4480.84'),
-  ('14','1671729572','1','ProjectSoft','5','1','Главная','Saving resource','127.0.0.1','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.102 Safari/537.36 OPR/90.0.4480.84'),
-  ('15','1671729572','1','ProjectSoft','27','1','Главная','Editing resource','127.0.0.1','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.102 Safari/537.36 OPR/90.0.4480.84'),
-  ('16','1671729704','1','ProjectSoft','106','-','-','Viewing Modules','127.0.0.1','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.102 Safari/537.36 OPR/90.0.4480.84'),
-  ('17','1671729709','1','ProjectSoft','108','3','ClientSettings','Edit module','127.0.0.1','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.102 Safari/537.36 OPR/90.0.4480.84'),
-  ('18','1671733404','1','ProjectSoft','26','-','-','Refreshing site','127.0.0.1','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.102 Safari/537.36 OPR/90.0.4480.84'),
-  ('19','1671733406','1','ProjectSoft','26','-','-','Refreshing site','127.0.0.1','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.102 Safari/537.36 OPR/90.0.4480.84'),
-  ('20','1671733413','1','ProjectSoft','93','-','-','Backup Manager','127.0.0.1','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.102 Safari/537.36 OPR/90.0.4480.84');
+  ('1','1671832632','1','ProjectSoft','54','-','evo_manager_log','Optimizing a table','127.0.0.1','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36 OPR/94.0.0.0'),
+  ('2','1671832632','1','ProjectSoft','93','-','-','Backup Manager','127.0.0.1','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36 OPR/94.0.0.0');
 
 #
 # Dumping data for table `evo_manager_users`
@@ -1005,16 +988,19 @@ INSERT INTO `evo_manager_users` VALUES
 # Dumping data for table `evo_pagebuilder`
 #
 
+INSERT INTO `evo_pagebuilder` VALUES
+  ('3','5','default','','documents','{\"text\":\"\",\"files\":[{\"text\":\"Меню питания\",\"file\":\"assets/files/26.12.2022.pdf\"},{\"text\":\"111\",\"file\":\"assets/files/compressed.tracemonkey-pldi-09.pdf\"},{\"text\":\"222\",\"file\":\"assets/files/compressed.tracemonkey-pldi-09.pdf\"},{\"text\":\"222???123\",\"file\":\"assets/files/compressed.tracemonkey-pldi-09.pdf?123=342342&asd=.pdf\"},{\"text\":\"222####123\",\"file\":\"assets/files/compressed.tracemonkey-pldi-09.pdf#123=342342&asd=.pdf\"},{\"text\":\"333\",\"file\":\"assets/files/index.html\"},{\"text\":\"https://projectsoft.ru/\",\"file\":\"https://projectsoft.ru/\"}]}','1','0');
+
 #
 # Dumping data for table `evo_site_content`
 #
 
 INSERT INTO `evo_site_content` VALUES
   ('1','document','text/html','Главная','О ведомстве','О ведомстве','index','','1','0','0','0','0','О ведомстве','<p class=\"text-justify\">Государственное казенное учреждение здравоохранения Республиканский медицинский центр мобилизационных резервов &laquo;Резерв&raquo; Министерства здравоохранения Республики Татарстан является <a href=\"[~4~]\">&laquo;Учреждением здравоохранения особого типа&raquo;</a> с единой номенклатурой государственных и муниципальных учреждений здравоохранения.</p>\n<p class=\"text-justify\">Учреждение создано в соответствии с приказом Министерства здравоохранения Республики Татарстан от 14 декабря 1996г. № 750 в порядке реорганизации ранее действовавшей Базы специального медицинского снабжения Министерства здравоохранения Республики Татарстан, и является преемником ее прав и обязанностей</p>\n<p class=\"text-justify\">Учреждение является некоммерческой организацией, финансируемой за счет средств бюджета, является юридическим лицом, имеет самостоятельный баланс, расчетный, валютный и иные счета в учреждениях банков.<br>Учредителем учреждения является Министерство здравоохранения Республики Татарстан в соответствии с распоряжением Министерства земельных и имущественных отношений Республики Татарстан от 27.02.2002г. № 128-р &laquo;О предоставлении полномочий Министерству здравоохранения Республики Татарстан&raquo;.</p>\n<p class=\"text-justify\">Деятельность ГКУЗ РМЦ МР &laquo;Резерв&raquo; МЗ РТ направлена на обеспечение качественной и количественной сохранности материальных ценностей мобилизационного резерва и постоянной готовности ее к выдаче для использования по предназначению. Запасы мобилизационного резерва, медицинского назначения, независимо от места их размещения являются федеральной собственностью.</p>\n<p class=\"text-justify\">Предпринимательскую деятельность Управление, ГКУЗ РМЦ МР &laquo;Резерв&raquo; МЗ РТ, не осуществляет.</p>\n<h2 class=\"text-justify\">Официальный сайт</h2>\n<p class=\"text-justify\"><a href=\"[(site_url)]\">[(site_url)]</a></p>','1','3','0','1','0','1','1130304721','1','1671729572','0','0','0','1130304721','1','Главная','0','0','0','0','0','1'),
-  ('2','document','text/html','Руководитель','Понамарчук<br> Виталий  Владимирович','Понамарчук Виталий  Владимирович','leader','','1','0','0','0','0','Понамарчук Виталий  Владимирович','','1','5','1','1','0','1','1671480971','1','1671654756','0','0','0','1671480971','1','Руководитель','0','0','0','0','0','1'),
-  ('3','document','text/html','Заместители','Заместители','Заместители','deputy','','1','0','0','0','0','Заместители','','1','6','2','1','0','1','1671481100','1','1671650596','0','0','0','1671481100','1','Заместители','0','0','0','0','0','1'),
+  ('2','document','text/html','Руководитель','Понамарчук<br> Виталий  Владимирович','Понамарчук Виталий  Владимирович','leader','','1','0','0','0','0','Понамарчук Виталий  Владимирович','<p>Год рождения 5 августа 1972 года.</p>\n<p>Образование высшее. Окончил Казанский государственный медицинский университет, 1994г.<br>Московская государственная юридическая академия.<br>Специальность по образованию Врач по специальности &laquo;стоматология&raquo;, &laquo;Юриспруденция&raquo;<br>Ученая степень, звание Кандидат медицинских наук</p>\n<h3>Опыт работы</h3>\n<p>09.1994-08.1996 Клинический ординатор КГМУ<br>10.1996-09.1999 Аспирант КГМУ<br>10.1999-03.2000 Врач-стоматолог-ортопед санатория-профилактория Миннибаевского ГПЗ, г. Альметьевск<br>03.2000-04.2001 Врач-стоматолог-ортопед стоматологической поликлиники №1 г. Казань<br>04.2001-07.2005 Заместитель главного врача по организационно-методической работе Городской поликлиники №14<br>08.2005-12.2008 Заместитель главного врача по организационно-методической работе РКБ №3<br>12.2008-07.2012 Главный врач Высокогорской центральной районной больницы<br>С июля 2012 года директор ГУЗ РМЦ МР &laquo;Резерв&raquo; МЗ РТ<br>Женат, воспитывает дочь.</p>','1','5','1','1','0','1','1671480971','1','1671815294','0','0','0','1671480971','1','Руководитель','0','0','0','0','0','1'),
+  ('3','document','text/html','Заместители','Заместители','Заместители','deputy','','1','0','0','0','0','Заместители','','1','6','2','1','0','1','1671481100','1','1671813807','0','0','0','1671481100','1','Заместители','0','0','0','0','0','1'),
   ('4','document','text/html','Структура ведомства','Структура ведомства','Структура ведомства','department-structure','','1','0','0','0','0','Структура ведомства','','1','7','3','1','0','1','1671481122','1','1671644692','0','0','0','1671481122','1','Структура ведомства','0','0','0','0','0','1'),
-  ('5','document','text/html','Документы','Документы','Документы','documents','','1','0','0','0','0','Документы','','1','8','4','1','0','1','1671481137','1','1671686455','0','0','0','1671481137','1','Документы','0','0','0','0','0','1'),
+  ('5','document','text/html','Документы','Документы','Документы','documents','','1','0','0','0','0','Документы','','1','8','4','1','0','1','1671481137','1','1671829541','0','0','0','1671481137','1','Документы','0','0','0','0','0','1'),
   ('6','document','text/html','assets','','','assets','','0','0','0','0','1','','','0','0','6','0','0','1','1671481182','1','1671630611','0','0','0','0','0','','1','0','0','0','1','0'),
   ('7','document','text/html','404 Not Found','404 Not Found','404 Not Found','404','','1','0','0','6','0','404 Not Found','','0','9','0','0','0','1','1671481246','1','1671630517','0','0','0','1671481246','1','404 Not Found','0','0','0','0','1','0'),
   ('9','document','text/html','Сайт в разработке','Сайт в разработке','Сайт в разработке','develop','','1','0','0','6','0','Сайт в разработке','','0','3','2','0','0','1','1671481439','1','1671481445','0','0','0','1671481439','1','Сайт в разработке','0','0','0','0','1','0'),
@@ -1159,7 +1145,7 @@ INSERT INTO `evo_site_snippets` VALUES
 INSERT INTO `evo_site_templates` VALUES
   ('3','Шаблон «Главная страница»',NULL,'','0','6','','0','{{@FILE assets/templates/projectsoft/html/index.html}}','0','1','0','1671630541'),
   ('4','Шаблон «Дефолтный»',NULL,'','0','6','','0','{{@FILE assets/templates/projectsoft/html/default.html}}','0','1','1671556916','1671630548'),
-  ('5','Шаблон «Руководитель»',NULL,'','0','6','','0','{{@FILE assets/templates/projectsoft/html/default.html}}','0','0','1671628325','1671630570'),
+  ('5','Шаблон «Руководитель»',NULL,'','0','6','','0','{{@FILE assets/templates/projectsoft/html/leader.html}}','0','0','1671628325','1671809804'),
   ('6','Шаблон «Заместители»',NULL,'','0','6','','0','{{@FILE assets/templates/projectsoft/html/deputy.html}}','0','0','0','1671648730'),
   ('7','Шаблон «Структура ведомства»',NULL,'','0','6','','0','{{@FILE assets/templates/projectsoft/html/structure.html}}','0','0','0','1671635509'),
   ('8','Шаблон «Документы»',NULL,'','0','6','','0','{{@FILE assets/templates/projectsoft/html/documents.html}}','0','0','0','1671685106'),
@@ -1177,7 +1163,7 @@ INSERT INTO `evo_site_templates` VALUES
 INSERT INTO `evo_site_tmplvar_contentvalues` VALUES
   ('1','4','1','[(site_name)]'),
   ('2','5','4','{\"fieldValue\":[{\"department\":\"Бухгалтерия\",\"fio\":\"Фамилия Имя Отчество\",\"work\":\"Главный бухгалтер\",\"phone\":\"+7 (846) 333-68-86\",\"email\":\"06029@mail.miac.samregion.ru\",\"photo\":\"assets/images/evo-logo.png\",\"thumb\":\"\"},{\"department\":\"Планово-экономический отдел\",\"fio\":\"Фамилия Имя Отчество\",\"work\":\"Начальник планово-экономического отдела\",\"phone\":\"+7 (846) 333-68-86\",\"email\":\"06029@mail.miac.samregion.ru\",\"photo\":\"assets/images/evo-logo.png\",\"thumb\":\"\"},{\"department\":\"Отдел кадров\",\"fio\":\"Фамилия Имя Отчество\",\"work\":\"Начальник отдела кадров\",\"phone\":\"+7 (846) 333-68-86\",\"email\":\"06029@mail.miac.samregion.ru\",\"photo\":\"assets/images/evo-logo.png\",\"thumb\":\"\"},{\"department\":\"Отдел материальных ценностей мобилизационного резерва\",\"fio\":\"Фамилия Имя Отчество\",\"work\":\"Начальник отдела материальных ценностей мобилизационного резерва\",\"phone\":\"+7 (846) 333-68-86\",\"email\":\"06029@mail.miac.samregion.ru\",\"photo\":\"assets/images/evo-logo.png\",\"thumb\":\"\"}],\"fieldSettings\":{\"autoincrement\":1}}'),
-  ('3','6','3','{\"fieldValue\":[{\"fio\":\"Фамилия\\nИмя Отчество\",\"work\":\"Заместитель директора по общим вопросам\",\"phone\":\"+7 (999) 999-99-99\",\"email\":\"mail@exemple.com\",\"photo\":\"assets/images/evo-logo.png\",\"thumb\":\"\"},{\"fio\":\"Фамилия\\nИмя Отчество\",\"work\":\"Заместитель директора по мобилизационной работе\",\"phone\":\"+7 (999) 999-99-99\",\"email\":\"mail@exemple.com\",\"photo\":\"assets/images/evo-logo.png\",\"thumb\":\"\"}],\"fieldSettings\":{\"autoincrement\":1}}'),
+  ('3','6','3','{\"fieldValue\":[{\"fio\":\"Фамилия\\nИмя Отчество\",\"work\":\"Заместитель директора по общим вопросам\",\"phone\":\"+7 (999) 999-99-99\",\"email\":\"mail@exemple.com\",\"photo\":\"\",\"thumb\":\"\"},{\"fio\":\"Фамилия\\nИмя Отчество\",\"work\":\"Заместитель директора по мобилизационной работе\",\"phone\":\"+7 (999) 999-99-99\",\"email\":\"mail@exemple.com\",\"photo\":\"\",\"thumb\":\"\"}],\"fieldSettings\":{\"autoincrement\":1}}'),
   ('5','2','1','[*longtitle*]');
 
 #
@@ -1403,7 +1389,7 @@ INSERT INTO `evo_system_eventnames` VALUES
 #
 
 INSERT INTO `evo_system_settings` VALUES
-  ('settings_version','1.4.21'),
+  ('settings_version','1.4.22'),
   ('manager_theme','default'),
   ('server_offset_time','0'),
   ('manager_language','russian-UTF8'),
@@ -1549,7 +1535,7 @@ INSERT INTO `evo_system_settings` VALUES
   ('reload_captcha_words',''),
   ('captcha_words','EVO,Access,Better,BitCode,Chunk,Cache,Desc,Design,Excell,Enjoy,URLs,TechView,Gerald,Griff,Humphrey,Holiday,Intel,Integration,Joystick,Join(),Oscope,Genetic,Light,Likeness,Marit,Maaike,Niche,Netherlands,Ordinance,Oscillo,Parser,Phusion,Query,Question,Regalia,Righteous,Snippet,Sentinel,Template,Thespian,Unity,Enterprise,Verily,Tattoo,Veri,Website,WideWeb,Yap,Yellow,Zebra,Zygote'),
   ('captcha_words_default','EVO,Access,Better,BitCode,Chunk,Cache,Desc,Design,Excell,Enjoy,URLs,TechView,Gerald,Griff,Humphrey,Holiday,Intel,Integration,Joystick,Join(),Oscope,Genetic,Light,Likeness,Marit,Maaike,Niche,Netherlands,Ordinance,Oscillo,Parser,Phusion,Query,Question,Regalia,Righteous,Snippet,Sentinel,Template,Thespian,Unity,Enterprise,Verily,Tattoo,Veri,Website,WideWeb,Yap,Yellow,Zebra,Zygote'),
-  ('filemanager_path','C:/OpenServer/domains/rezerv.school/site/'),
+  ('filemanager_path','C:/OSPanel/domains/rezerv.school/site/'),
   ('upload_files','bmp,ico,gif,jpeg,jpg,png,psd,tif,tiff,fla,flv,swf,aac,au,avi,css,cache,doc,docx,gz,gzip,htaccess,htm,html,js,mp3,mp4,mpeg,mpg,ods,odp,odt,pdf,ppt,pptx,rar,tar,tgz,txt,wav,wmv,xls,xlsx,xml,z,zip,JPG,JPEG,PNG,GIF,svg,tpl'),
   ('upload_images','bmp,ico,gif,jpeg,jpg,png,psd,tif,tiff,svg'),
   ('upload_media','au,avi,mp3,mp4,mpeg,mpg,wav,wmv'),
@@ -1558,7 +1544,7 @@ INSERT INTO `evo_system_settings` VALUES
   ('new_folder_permissions','0755'),
   ('which_browser','mcpuk'),
   ('rb_webuser','0'),
-  ('rb_base_dir','C:/OpenServer/domains/rezerv.school/site/assets/'),
+  ('rb_base_dir','C:/OSPanel/domains/rezerv.school/site/assets/'),
   ('rb_base_url','assets/'),
   ('clean_uploaded_filename','1'),
   ('strip_image_paths','1'),
@@ -1576,7 +1562,7 @@ INSERT INTO `evo_system_settings` VALUES
   ('denyExtensionRename','0'),
   ('showHiddenFiles','0'),
   ('lang_code','ru'),
-  ('sys_files_checksum','a:4:{s:50:\"C:/OpenServer/domains/rezerv.school/site/index.php\";s:32:\"62aec542f3fd84f47f91d2248fa59153\";s:50:\"C:/OpenServer/domains/rezerv.school/site/.htaccess\";s:32:\"b12739e14a9d18d7090427db01bd4021\";s:58:\"C:/OpenServer/domains/rezerv.school/site/manager/index.php\";s:32:\"bb667738d2d80c29198903030ec6e657\";s:72:\"C:/OpenServer/domains/rezerv.school/site/manager/includes/config.inc.php\";s:32:\"f483d2bb3b57ceb40657710465bf1a5b\";}'),
+  ('sys_files_checksum','a:4:{s:47:\"C:/OSPanel/domains/rezerv.school/site/index.php\";s:32:\"62aec542f3fd84f47f91d2248fa59153\";s:47:\"C:/OSPanel/domains/rezerv.school/site/.htaccess\";s:32:\"b12739e14a9d18d7090427db01bd4021\";s:55:\"C:/OSPanel/domains/rezerv.school/site/manager/index.php\";s:32:\"bb667738d2d80c29198903030ec6e657\";s:69:\"C:/OSPanel/domains/rezerv.school/site/manager/includes/config.inc.php\";s:32:\"23f1047f4181682138aaab5f352ae572\";}'),
   ('map_apykey','8e879461-d958-48ec-92ce-0f3930887231'),
   ('map_point','[53.185922, 50.100809]'),
   ('map_addres','443020, Самарская область, город Самара, Самарская ул., д.63'),

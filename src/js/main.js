@@ -7,7 +7,14 @@
 		speech: false,
 		panelFixed: false
 	});
-	console.log(bvi);
+	$(window).on('resize scroll', function(e){
+		setTimeout(function(){
+			$('.fancybox-content').css({
+				height: '100%'
+			});
+		}, 5);
+		
+	})
 	$(document).on('click', '.nav-btn', function(e){
 		e.preventDefault();
 		$(e.target).closest('.navbar-site').toggleClass('open');
@@ -25,7 +32,21 @@
 				if(regn.test(src)){
 					e.preventDefault();
 					$.fancybox.open({
-						src: base + '/assets/pdfjs/viewer/?file=' + href.replace(reg, '')
+						toolbar: true,
+						type : 'iframe',
+						src: base + '/assets/pdfjs/viewer/?file=' + href.replace(reg, ''),
+						opts : {
+							afterShow : function() {
+								$('.fancybox-content').css({
+									height: '100%'
+								});
+							},
+							afterLoad: function(){
+								$('.fancybox-content').css({
+									height: '100%'
+								});
+							}
+						}
 					});
 					return !1
 				}

@@ -429,5 +429,11 @@ See https://github.com/adobe-type-tools/cmap-resources
     <div id="printContainer"></div>
 
     <input type="file" id="fileInput" class="hidden">
+	<style>
+	#editorModeSeparator,
+	#editorModeButtons {
+		display: none;
+	}
+	</style>
   </body>
 </html>
