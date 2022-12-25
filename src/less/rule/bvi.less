@@ -2,5 +2,25 @@ html body .bvi-panel {
 	&,
 	&.bvi-fixed-top{
 		position: sticky;
+		z-index: 20 !important;
+	}
+}
+.bvi-active {
+	.bvi-body {
+		position: relative;
+	}
+	&.fancybox-active {
+		.bvi-body {
+			.fancybox__wrapper {
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				width: 100%;
+				height: 100%;
+				z-index: 30;
+			}
+		}
 	}
 }
