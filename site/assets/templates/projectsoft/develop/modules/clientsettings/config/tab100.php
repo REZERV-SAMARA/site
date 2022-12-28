@@ -4,6 +4,12 @@ return [
 	'caption' => 'Yandex.Api',
 	'introtext' => 'Настройки Yandex.Api',
 	'settings' => [
+		'yandex_verification' => [
+			'caption' => 'Yandex Verification',
+			'type'  => 'text',
+			'note'  => 'Yandex Verification',
+			'default_text' => '',
+		],
 		'map_apykey' => [
 			'caption' => 'API key Yandex.MAP',
 			'type'  => 'text',

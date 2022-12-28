@@ -20,7 +20,7 @@ html(lang="ru-Ru" prefix="og: http://ogp.me/ns#")
 											|Директор
 									.col-md-4.leader-image
 										p
-											img(src!="[[phpthumb? &input=`[(director_photo)]` &options=`w=370,h=493,zc=C` &noImage=`assets/templates/projectsoft/images/no_photo.png`]]" alt!="<@IF:[*longtitle:isnot('')*]>[*longtitle:notags*]<@ELSE>[*pagetitle:notags*]<@ENDIF>")
+											img(src!="[(site_url)][[phpthumb? &input=`[(director_photo)]` &options=`w=370,h=493,zc=C` &noImage=`assets/templates/projectsoft/images/no_photo.png`]]" alt!="<@IF:[*longtitle:isnot('')*]>[*longtitle:notags*]<@ELSE>[*pagetitle:notags*]<@ENDIF>")
 									.col-md-12.leader-hr
 										hr
 								.main-content.columns.leader-content
@@ -30,5 +30,6 @@ html(lang="ru-Ru" prefix="og: http://ogp.me/ns#")
 									.col-md-8.leader-content-text
 										|[*content*]
 			|{{@FILE assets/templates/projectsoft/html/tpl/footer.html}}
+		// Fancybox wrapper
 		.fancybox__wrapper
 		|{{@FILE assets/templates/projectsoft/html/tpl/javascript.html}}

@@ -4,6 +4,7 @@ node_modules
 bower_components
 *-lock.json
 *.sublime-workspace
+install
 site/*.png
 site/*.ico
 site/*.webmanifest
@@ -48,6 +49,7 @@ site/assets/plugins/tinymce4/l*
 site/assets/plugins/tinymce4/p*
 site/assets/plugins/tinymce4/s*
 site/assets/plugins/tinymce4/t*
+site/assets/plugins/[a-z]+
 
 site/assets/plugins/pagebuilder/i*
 site/assets/plugins/pagebuilder/j*

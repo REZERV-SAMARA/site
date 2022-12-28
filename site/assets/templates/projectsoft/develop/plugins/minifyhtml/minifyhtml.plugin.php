@@ -15,7 +15,7 @@ switch ($e->name) {
 		endif;
 		if($modx->documentObject['minify'][1]==1 && $minify):
 			$str = $modx->documentOutput;
-			$str = preg_replace('/\s+?<\!--.*-->\s+?/Usi', '', $str);
+			$str = preg_replace('/<\!--.*-->/Usi', '', $str);
 			$re = '/((?:(?:content|title|alt)=))(?:"|\')(.*)?(?:"|\')/Usi';
 			$use_hash = md5(Util::has());
 			$str = preg_replace_callback($re, function ($matches) use ($use_hash) {

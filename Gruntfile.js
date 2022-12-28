@@ -84,7 +84,7 @@ module.exports = function(grunt){
 				HTMLPrefix: '[(site_url)]',
 				/* HTML */
 				truncateHTML: false,
-				html: 'src/pug/inc/favicon.pug'
+				html: 'src/pug/tpl/favicon.pug'
 			},
 			default: {
 				src: 'src/favicon/favicon.png',
