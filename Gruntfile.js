@@ -62,6 +62,7 @@ module.exports = function(grunt){
 		},
 		favicons: {
 			options: {
+				debug: true,
 				regular: true,
 				trueColor: true,
 				sharp: 0,
