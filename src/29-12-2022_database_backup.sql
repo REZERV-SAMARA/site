@@ -3,7 +3,7 @@
 # MODX Version:1.4.21
 # 
 # Host: 
-# Generation Time: 29-12-2022 02:39:18
+# Generation Time: 29-12-2022 03:23:17
 # Server version: 5.5.5-10.3.22-MariaDB
 # PHP Version: 7.4.5
 # Database: `EvoRezerv`
@@ -37,6 +37,114 @@ CREATE TABLE `evo_categories` (
   `rank` int(5) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='Categories to be used snippets,tv,chunks, etc';
+
+
+
+# --------------------------------------------------------
+
+#
+# Table structure for table `evo_document_groups`
+#
+
+DROP TABLE IF EXISTS `evo_document_groups`;
+CREATE TABLE `evo_document_groups` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `document_group` int(10) NOT NULL DEFAULT 0,
+  `document` int(10) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `ix_dg_id` (`document_group`,`document`),
+  KEY `document` (`document`),
+  KEY `document_group` (`document_group`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Contains data used for access permissions.';
+
+
+
+# --------------------------------------------------------
+
+#
+# Table structure for table `evo_documentgroup_names`
+#
+
+DROP TABLE IF EXISTS `evo_documentgroup_names`;
+CREATE TABLE `evo_documentgroup_names` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `name` varchar(245) NOT NULL DEFAULT '',
+  `private_memgroup` tinyint(4) DEFAULT 0 COMMENT 'determine whether the document group is private to manager users',
+  `private_webgroup` tinyint(4) DEFAULT 0 COMMENT 'determines whether the document is private to web users',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Contains data used for access permissions.';
+
+
+
+# --------------------------------------------------------
+
+#
+# Table structure for table `evo_event_log`
+#
+
+DROP TABLE IF EXISTS `evo_event_log`;
+CREATE TABLE `evo_event_log` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `eventid` int(11) DEFAULT 0,
+  `createdon` int(11) NOT NULL DEFAULT 0,
+  `type` tinyint(4) NOT NULL DEFAULT 1 COMMENT '1- information, 2 - warning, 3- error',
+  `user` int(11) NOT NULL DEFAULT 0 COMMENT 'link to user table',
+  `usertype` tinyint(4) NOT NULL DEFAULT 0 COMMENT '0 - manager, 1 - web',
+  `source` varchar(50) NOT NULL DEFAULT '',
+  `description` text DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user` (`user`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Stores event and error logs';
+
+
+
+# --------------------------------------------------------
+
+#
+# Table structure for table `evo_member_groups`
+#
+
+DROP TABLE IF EXISTS `evo_member_groups`;
+CREATE TABLE `evo_member_groups` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `user_group` int(10) NOT NULL DEFAULT 0,
+  `member` int(10) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `ix_group_member` (`user_group`,`member`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Contains data used for access permissions.';
+
+
+
+# --------------------------------------------------------
+
+#
+# Table structure for table `evo_membergroup_access`
+#
+
+DROP TABLE IF EXISTS `evo_membergroup_access`;
+CREATE TABLE `evo_membergroup_access` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `membergroup` int(10) NOT NULL DEFAULT 0,
+  `documentgroup` int(10) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Contains data used for access permissions.';
+
+
+
+# --------------------------------------------------------
+
+#
+# Table structure for table `evo_membergroup_names`
+#
+
+DROP TABLE IF EXISTS `evo_membergroup_names`;
+CREATE TABLE `evo_membergroup_names` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `name` varchar(245) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Contains data used for access permissions.';
 
 
 
@@ -144,6 +252,22 @@ CREATE TABLE `evo_site_htmlsnippets` (
 # --------------------------------------------------------
 
 #
+# Table structure for table `evo_site_module_access`
+#
+
+DROP TABLE IF EXISTS `evo_site_module_access`;
+CREATE TABLE `evo_site_module_access` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `module` int(11) NOT NULL DEFAULT 0,
+  `usergroup` int(11) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Module users group access permission';
+
+
+
+# --------------------------------------------------------
+
+#
 # Table structure for table `evo_site_module_depobj`
 #
 
@@ -226,7 +350,7 @@ CREATE TABLE `evo_site_plugins` (
   `createdon` int(11) NOT NULL DEFAULT 0,
   `editedon` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COMMENT='Contains the site plugins.';
+) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COMMENT='Contains the site plugins.';
 
 
 
@@ -279,6 +403,22 @@ CREATE TABLE `evo_site_templates` (
   `editedon` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COMMENT='Contains the site templates.';
+
+
+
+# --------------------------------------------------------
+
+#
+# Table structure for table `evo_site_tmplvar_access`
+#
+
+DROP TABLE IF EXISTS `evo_site_tmplvar_access`;
+CREATE TABLE `evo_site_tmplvar_access` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `tmplvarid` int(10) NOT NULL DEFAULT 0,
+  `documentgroup` int(10) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Contains data used for template variable access permissions.';
 
 
 
@@ -380,6 +520,260 @@ CREATE TABLE `evo_system_settings` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Contains Content Manager settings.';
 
 
+
+# --------------------------------------------------------
+
+#
+# Table structure for table `evo_user_messages`
+#
+
+DROP TABLE IF EXISTS `evo_user_messages`;
+CREATE TABLE `evo_user_messages` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `type` varchar(15) NOT NULL DEFAULT '',
+  `subject` varchar(60) NOT NULL DEFAULT '',
+  `message` text DEFAULT NULL,
+  `sender` int(10) NOT NULL DEFAULT 0,
+  `recipient` int(10) NOT NULL DEFAULT 0,
+  `private` tinyint(4) NOT NULL DEFAULT 0,
+  `postdate` int(20) NOT NULL DEFAULT 0,
+  `messageread` tinyint(1) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Contains messages for the Content Manager messaging system.';
+
+
+
+# --------------------------------------------------------
+
+#
+# Table structure for table `evo_user_roles`
+#
+
+DROP TABLE IF EXISTS `evo_user_roles`;
+CREATE TABLE `evo_user_roles` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL DEFAULT '',
+  `description` varchar(255) NOT NULL DEFAULT '',
+  `frames` int(1) NOT NULL DEFAULT 0,
+  `home` int(1) NOT NULL DEFAULT 0,
+  `view_document` int(1) NOT NULL DEFAULT 0,
+  `new_document` int(1) NOT NULL DEFAULT 0,
+  `save_document` int(1) NOT NULL DEFAULT 0,
+  `publish_document` int(1) NOT NULL DEFAULT 0,
+  `delete_document` int(1) NOT NULL DEFAULT 0,
+  `empty_trash` int(1) NOT NULL DEFAULT 0,
+  `action_ok` int(1) NOT NULL DEFAULT 0,
+  `logout` int(1) NOT NULL DEFAULT 0,
+  `help` int(1) NOT NULL DEFAULT 0,
+  `messages` int(1) NOT NULL DEFAULT 0,
+  `new_user` int(1) NOT NULL DEFAULT 0,
+  `edit_user` int(1) NOT NULL DEFAULT 0,
+  `logs` int(1) NOT NULL DEFAULT 0,
+  `edit_parser` int(1) NOT NULL DEFAULT 0,
+  `save_parser` int(1) NOT NULL DEFAULT 0,
+  `edit_template` int(1) NOT NULL DEFAULT 0,
+  `settings` int(1) NOT NULL DEFAULT 0,
+  `credits` int(1) NOT NULL DEFAULT 0,
+  `new_template` int(1) NOT NULL DEFAULT 0,
+  `save_template` int(1) NOT NULL DEFAULT 0,
+  `delete_template` int(1) NOT NULL DEFAULT 0,
+  `edit_snippet` int(1) NOT NULL DEFAULT 0,
+  `new_snippet` int(1) NOT NULL DEFAULT 0,
+  `save_snippet` int(1) NOT NULL DEFAULT 0,
+  `delete_snippet` int(1) NOT NULL DEFAULT 0,
+  `edit_chunk` int(1) NOT NULL DEFAULT 0,
+  `new_chunk` int(1) NOT NULL DEFAULT 0,
+  `save_chunk` int(1) NOT NULL DEFAULT 0,
+  `delete_chunk` int(1) NOT NULL DEFAULT 0,
+  `empty_cache` int(1) NOT NULL DEFAULT 0,
+  `edit_document` int(1) NOT NULL DEFAULT 0,
+  `change_password` int(1) NOT NULL DEFAULT 0,
+  `error_dialog` int(1) NOT NULL DEFAULT 0,
+  `about` int(1) NOT NULL DEFAULT 0,
+  `category_manager` int(1) NOT NULL DEFAULT 0,
+  `file_manager` int(1) NOT NULL DEFAULT 0,
+  `assets_files` int(1) NOT NULL DEFAULT 0,
+  `assets_images` int(1) NOT NULL DEFAULT 0,
+  `save_user` int(1) NOT NULL DEFAULT 0,
+  `delete_user` int(1) NOT NULL DEFAULT 0,
+  `save_password` int(11) NOT NULL DEFAULT 0,
+  `edit_role` int(1) NOT NULL DEFAULT 0,
+  `save_role` int(1) NOT NULL DEFAULT 0,
+  `delete_role` int(1) NOT NULL DEFAULT 0,
+  `new_role` int(1) NOT NULL DEFAULT 0,
+  `access_permissions` int(1) NOT NULL DEFAULT 0,
+  `bk_manager` int(1) NOT NULL DEFAULT 0,
+  `new_plugin` int(1) NOT NULL DEFAULT 0,
+  `edit_plugin` int(1) NOT NULL DEFAULT 0,
+  `save_plugin` int(1) NOT NULL DEFAULT 0,
+  `delete_plugin` int(1) NOT NULL DEFAULT 0,
+  `new_module` int(1) NOT NULL DEFAULT 0,
+  `edit_module` int(1) NOT NULL DEFAULT 0,
+  `save_module` int(1) NOT NULL DEFAULT 0,
+  `delete_module` int(1) NOT NULL DEFAULT 0,
+  `exec_module` int(1) NOT NULL DEFAULT 0,
+  `view_eventlog` int(1) NOT NULL DEFAULT 0,
+  `delete_eventlog` int(1) NOT NULL DEFAULT 0,
+  `new_web_user` int(1) NOT NULL DEFAULT 0,
+  `edit_web_user` int(1) NOT NULL DEFAULT 0,
+  `save_web_user` int(1) NOT NULL DEFAULT 0,
+  `delete_web_user` int(1) NOT NULL DEFAULT 0,
+  `web_access_permissions` int(1) NOT NULL DEFAULT 0,
+  `view_unpublished` int(1) NOT NULL DEFAULT 0,
+  `import_static` int(1) NOT NULL DEFAULT 0,
+  `export_static` int(1) NOT NULL DEFAULT 0,
+  `remove_locks` int(1) NOT NULL DEFAULT 0,
+  `display_locks` int(1) NOT NULL DEFAULT 0,
+  `change_resourcetype` int(1) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='Contains information describing the user roles.';
+
+
+
+# --------------------------------------------------------
+
+#
+# Table structure for table `evo_user_settings`
+#
+
+DROP TABLE IF EXISTS `evo_user_settings`;
+CREATE TABLE `evo_user_settings` (
+  `user` int(11) NOT NULL,
+  `setting_name` varchar(50) NOT NULL DEFAULT '',
+  `setting_value` text DEFAULT NULL,
+  PRIMARY KEY (`user`,`setting_name`),
+  KEY `setting_name` (`setting_name`),
+  KEY `user` (`user`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Contains backend user settings.';
+
+
+
+# --------------------------------------------------------
+
+#
+# Table structure for table `evo_web_groups`
+#
+
+DROP TABLE IF EXISTS `evo_web_groups`;
+CREATE TABLE `evo_web_groups` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `webgroup` int(10) NOT NULL DEFAULT 0,
+  `webuser` int(10) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `ix_group_user` (`webgroup`,`webuser`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Contains data used for web access permissions.';
+
+
+
+# --------------------------------------------------------
+
+#
+# Table structure for table `evo_web_user_attributes`
+#
+
+DROP TABLE IF EXISTS `evo_web_user_attributes`;
+CREATE TABLE `evo_web_user_attributes` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `internalKey` int(10) NOT NULL DEFAULT 0,
+  `fullname` varchar(100) NOT NULL DEFAULT '',
+  `role` int(10) NOT NULL DEFAULT 0,
+  `email` varchar(100) NOT NULL DEFAULT '',
+  `phone` varchar(100) NOT NULL DEFAULT '',
+  `mobilephone` varchar(100) NOT NULL DEFAULT '',
+  `blocked` int(1) NOT NULL DEFAULT 0,
+  `blockeduntil` int(11) NOT NULL DEFAULT 0,
+  `blockedafter` int(11) NOT NULL DEFAULT 0,
+  `logincount` int(11) NOT NULL DEFAULT 0,
+  `lastlogin` int(11) NOT NULL DEFAULT 0,
+  `thislogin` int(11) NOT NULL DEFAULT 0,
+  `failedlogincount` int(10) NOT NULL DEFAULT 0,
+  `sessionid` varchar(100) NOT NULL DEFAULT '',
+  `dob` int(10) NOT NULL DEFAULT 0,
+  `gender` int(1) NOT NULL DEFAULT 0 COMMENT '0 - unknown, 1 - Male 2 - female',
+  `country` varchar(25) NOT NULL DEFAULT '',
+  `street` varchar(255) NOT NULL DEFAULT '',
+  `city` varchar(255) NOT NULL DEFAULT '',
+  `state` varchar(25) NOT NULL DEFAULT '',
+  `zip` varchar(25) NOT NULL DEFAULT '',
+  `fax` varchar(100) NOT NULL DEFAULT '',
+  `photo` varchar(255) NOT NULL DEFAULT '' COMMENT 'link to photo',
+  `comment` text DEFAULT NULL,
+  `createdon` int(11) NOT NULL DEFAULT 0,
+  `editedon` int(11) NOT NULL DEFAULT 0,
+  `verified` int(1) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`),
+  KEY `userid` (`internalKey`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Contains information for web users.';
+
+
+
+# --------------------------------------------------------
+
+#
+# Table structure for table `evo_web_user_settings`
+#
+
+DROP TABLE IF EXISTS `evo_web_user_settings`;
+CREATE TABLE `evo_web_user_settings` (
+  `webuser` int(11) NOT NULL,
+  `setting_name` varchar(50) NOT NULL DEFAULT '',
+  `setting_value` text DEFAULT NULL,
+  PRIMARY KEY (`webuser`,`setting_name`),
+  KEY `setting_name` (`setting_name`),
+  KEY `webuserid` (`webuser`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Contains web user settings.';
+
+
+
+# --------------------------------------------------------
+
+#
+# Table structure for table `evo_web_users`
+#
+
+DROP TABLE IF EXISTS `evo_web_users`;
+CREATE TABLE `evo_web_users` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `username` varchar(100) NOT NULL DEFAULT '',
+  `password` varchar(100) NOT NULL DEFAULT '',
+  `cachepwd` varchar(100) NOT NULL DEFAULT '' COMMENT 'Store new unconfirmed password',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+
+# --------------------------------------------------------
+
+#
+# Table structure for table `evo_webgroup_access`
+#
+
+DROP TABLE IF EXISTS `evo_webgroup_access`;
+CREATE TABLE `evo_webgroup_access` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `webgroup` int(10) NOT NULL DEFAULT 0,
+  `documentgroup` int(10) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Contains data used for web access permissions.';
+
+
+
+# --------------------------------------------------------
+
+#
+# Table structure for table `evo_webgroup_names`
+#
+
+DROP TABLE IF EXISTS `evo_webgroup_names`;
+CREATE TABLE `evo_webgroup_names` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `name` varchar(245) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Contains data used for web access permissions.';
+
+
 #
 # Dumping data for table `evo_categories`
 #
@@ -393,6 +787,30 @@ INSERT INTO `evo_categories` VALUES
   ('6','TEMPLATES','0'),
   ('7','FRONTEND','0'),
   ('8','Dashboard','0');
+
+#
+# Dumping data for table `evo_document_groups`
+#
+
+#
+# Dumping data for table `evo_documentgroup_names`
+#
+
+#
+# Dumping data for table `evo_event_log`
+#
+
+#
+# Dumping data for table `evo_member_groups`
+#
+
+#
+# Dumping data for table `evo_membergroup_access`
+#
+
+#
+# Dumping data for table `evo_membergroup_names`
+#
 
 #
 # Dumping data for table `evo_pagebuilder`
@@ -423,6 +841,10 @@ INSERT INTO `evo_site_content` VALUES
 
 INSERT INTO `evo_site_htmlsnippets` VALUES
   ('1','mm_rules','Default ManagerManager rules.','2','none','2','0','// more example rules are in assets/plugins/managermanager/example_mm_rules.inc.php\n// example of how PHP is allowed - check that a TV named documentTags exists before creating rule\n\nif ($modx->db->getValue($modx->db->select(\'count(id)\', $modx->getFullTableName(\'site_tmplvars\'), \"name=\'documentTags\'\"))) {\n	mm_widget_tags(\'documentTags\', \' \'); // Give blog tag editing capabilities to the \'documentTags (3)\' TV\n}\nmm_widget_showimagetvs(); // Always give a preview of Image TVs\n\n// mm_createTab(\'SEO\', \'seo\', \'\', \'\', \'\', \'\');\n// mm_moveFieldsToTab(\'titl,keyw,desc,seoOverride,noIndex,sitemap_changefreq,sitemap_priority,sitemap_exclude\', \'seo\', \'\', \'\');\nmm_widget_tags(\'keyw\',\',\'); // Give blog tag editing capabilities to the \'documentTags (3)\' TV\n\n\n//mm_createTab(\'Images\', \'photos\', \'\', \'\', \'\', \'850\');\n//mm_moveFieldsToTab(\'images,photos\', \'photos\', \'\', \'\');\n\n//mm_hideFields(\'longtitle,description,link_attributes,menutitle,content\', \'\', \'6,7\');\n\n//mm_hideTemplates(\'0,5,8,9,11,12\', \'2,3\');\n\n//mm_hideTabs(\'settings, access\', \'2\');\n','0','0','1671454851','0');
+
+#
+# Dumping data for table `evo_site_module_access`
+#
 
 #
 # Dumping data for table `evo_site_module_depobj`
@@ -512,7 +934,8 @@ INSERT INTO `evo_site_plugin_events` VALUES
   ('18','151','0');
 
 INSERT INTO `evo_site_plugin_events` VALUES
-  ('19','121','0');
+  ('19','121','0'),
+  ('20','130','1');
 
 #
 # Dumping data for table `evo_site_plugins`
@@ -535,7 +958,8 @@ INSERT INTO `evo_site_plugins` VALUES
   ('16','CreateDocFolder','','0','3','0','require MODX_BASE_PATH.\'assets/templates/projectsoft/develop/plugins/createdocfolder/plugin.createdocfolder.php\';','0','{\n  \"pad\": [\n    {\n      \"label\": \"Количество нулей слева\",\n      \"type\": \"int\",\n      \"value\": \"4\",\n      \"default\": \"4\",\n      \"desc\": \"\"\n    }\n  ]\n}','0',' ','1671989960','1671991059'),
   ('17','WidgetManager','<strong>v 1.2</strong> Evolution Dashboard Widget Manager','0','8','0','// get manager role\n$role = $_SESSION[\'mgrRole\'];\n// get language\nglobal $_lang;\n$e = &$modx->Event;\nswitch($e->name){\ncase \'OnManagerWelcomeHome\':\n// get manager role\n$role = $_SESSION[\'mgrRole\']; 		\n//welcome\n$welcome_showhide = isset($welcome_showhide) ? $welcome_showhide: \'hide\';\nif(($role!=1) AND ($welcome_showhide == \'AdminOnly\') OR ($welcome_showhide == \'hide\'))  {\n$widgets[\'welcome\'][\'hide\']=\'1\';\n}\n//onlineinfo\nif(($role!=1) AND ($onlineinfo_showhide == \'AdminOnly\') OR ($onlineinfo_showhide == \'hide\'))  {\n$widgets[\'onlineinfo\'][\'hide\']=\'1\';\n}\n//recentinfo\nif(($role!=1) AND ($recentinfo_showhide == \'AdminOnly\') OR ($recentinfo_showhide == \'hide\'))  {\n$widgets[\'recentinfo\'][\'hide\']=\'1\';\n}\n//news\nif(($role!=1) AND ($news_showhide == \'AdminOnly\') OR ($news_showhide == \'hide\'))  {\n$widgets[\'news\'][\'hide\']=\'1\';\n}\n//security\nif(($role!=1) AND ($security_showhide == \'AdminOnly\') OR ($security_showhide == \'hide\'))  {\n$widgets[\'security\'][\'hide\']=\'1\';\n}\n//cols\n$widgets[\'welcome\'][\'cols\']=\'col-sm-\'.$welcome_sizex.\'\'; \n$widgets[\'onlineinfo\'][\'cols\']=\'col-sm-\'.$onlineinfo_sizex.\'\'; \n$widgets[\'recentinfo\'][\'cols\']=\'col-sm-\'.$recentinfo_sizex.\'\'; \n$widgets[\'news\'][\'cols\']=\'col-sm-\'.$news_sizex.\'\'; \n$widgets[\'security\'][\'cols\']=\'col-sm-\'.$security_sizex.\'\'; \n//menuindex\n$widgets[\'welcome\'][\'menuindex\']=$welcome_menuindex; \n$widgets[\'onlineinfo\'][\'menuindex\']=$onlineinfo_menuindex; \n$widgets[\'recentinfo\'][\'menuindex\']=$recentinfo_menuindex; \n$widgets[\'news\'][\'menuindex\']=$news_menuindex; \n$widgets[\'security\'][\'menuindex\']=$security_menuindex; \n$e->output(serialize($widgets));\nbreak;\ncase \'OnManagerWelcomeRender\':\n// get plugin id\n$result = $modx->db->select(\'id\', $this->getFullTableName(\"site_plugins\"), \"name=\'{$modx->event->activePlugin}\' AND disabled=0\");\n$pluginid = $modx->db->getValue($result);\nif($modx->hasPermission(\'edit_plugin\')) {\n$button_pl_config = \'\n<!--div class=\"container-fluid\">\n    <p class=\"text-muted pull-right\">\n    <a class=\"btn btn-sm btn-secondary\" data-toggle=\"tooltip\" href=\"javascript:;\" title=\"\' . $_lang[\"settings_config\"] . \'\" class=\"text-muted pull-right\" onclick=\"parent.modx.popup({url:\\\'\'. MODX_MANAGER_URL.\'?a=102&id=\'.$pluginid.\'&tab=1\\\',title1:\\\'\' . $_lang[\"settings_config\"] . \'\\\',icon:\\\'fa-cog\\\',iframe:\\\'iframe\\\',selector2:\\\'#tabConfig\\\',position:\\\'center center\\\',width:\\\'80%\\\',height:\\\'80%\\\',hide:0,hover:0,overlay:1,overlayclose:1})\" ><i class=\"fa fa-cog\"></i> \' . $_lang[\"settings_config\"] . \'</a> \n    </p>\n  </div>\n</div-->\n\';\n}\n$e->output($button_pl_config);\nbreak;\n}\n','0','{\n  \"welcome_showhide\": [\n    {\n      \"label\": \"Show Welcome Widget:\",\n      \"type\": \"menu\",\n      \"value\": \"show\",\n      \"options\": \"show,hide,AdminOnly\",\n      \"default\": \"show\",\n      \"desc\": \"\"\n    }\n  ],\n  \"welcome_sizex\": [\n    {\n      \"label\": \"Welcome width:\",\n      \"type\": \"list\",\n      \"value\": \"12\",\n      \"options\": \"12,6,4,3\",\n      \"default\": \"6\",\n      \"desc\": \"\"\n    }\n  ],\n  \"welcome_menuindex\": [\n    {\n      \"label\": \"Welcome sort order:\",\n      \"type\": \"text\",\n      \"value\": \"1\",\n      \"default\": \"1\",\n      \"desc\": \"\"\n    }\n  ],\n  \"onlineinfo_showhide\": [\n    {\n      \"label\": \"Show Online Info widget:\",\n      \"type\": \"menu\",\n      \"value\": \"hide\",\n      \"options\": \"show,hide,AdminOnly\",\n      \"default\": \"show\",\n      \"desc\": \"\"\n    }\n  ],\n  \"onlineinfo_sizex\": [\n    {\n      \"label\": \"Online Info width:\",\n      \"type\": \"list\",\n      \"value\": \"6\",\n      \"options\": \"12,6,4,3\",\n      \"default\": \"6\",\n      \"desc\": \"\"\n    }\n  ],\n  \"onlineinfo_menuindex\": [\n    {\n      \"label\": \"Online Info sort order:\",\n      \"type\": \"text\",\n      \"value\": \"2\",\n      \"default\": \"2\",\n      \"desc\": \"\"\n    }\n  ],\n  \"recentinfo_showhide\": [\n    {\n      \"label\": \"Show Recent resource Widget:\",\n      \"type\": \"menu\",\n      \"value\": \"hide\",\n      \"options\": \"show,hide,AdminOnly\",\n      \"default\": \"show\",\n      \"desc\": \"\"\n    }\n  ],\n  \"recentinfo_sizex\": [\n    {\n      \"label\": \"Recent resource width:\",\n      \"type\": \"list\",\n      \"value\": \"12\",\n      \"options\": \"12,6,4,3\",\n      \"default\": \"12\",\n      \"desc\": \"\"\n    }\n  ],\n  \"recentinfo_menuindex\": [\n    {\n      \"label\": \"Recent resource sort order:\",\n      \"type\": \"text\",\n      \"value\": \"3\",\n      \"default\": \"3\",\n      \"desc\": \"\"\n    }\n  ],\n  \"news_showhide\": [\n    {\n      \"label\": \"Show News Widget:\",\n      \"type\": \"menu\",\n      \"value\": \"hide\",\n      \"options\": \"show,hide,AdminOnly\",\n      \"default\": \"show\",\n      \"desc\": \"\"\n    }\n  ],\n  \"news_sizex\": [\n    {\n      \"label\": \"News width:\",\n      \"type\": \"list\",\n      \"value\": \"6\",\n      \"options\": \"12,6,4,3\",\n      \"default\": \"6\",\n      \"desc\": \"\"\n    }\n  ],\n  \"news_menuindex\": [\n    {\n      \"label\": \"News sort order:\",\n      \"type\": \"text\",\n      \"value\": \"4\",\n      \"default\": \"4\",\n      \"desc\": \"\"\n    }\n  ],\n  \"security_showhide\": [\n    {\n      \"label\": \"Show SecurityNews Widget:\",\n      \"type\": \"menu\",\n      \"value\": \"hide\",\n      \"options\": \"show,hide,AdminOnly\",\n      \"default\": \"show\",\n      \"desc\": \"\"\n    }\n  ],\n  \"security_sizex\": [\n    {\n      \"label\": \"SecurityNews width:\",\n      \"type\": \"list\",\n      \"value\": \"6\",\n      \"options\": \"12,6,4,3\",\n      \"default\": \"6\",\n      \"desc\": \"\"\n    }\n  ],\n  \"security_menuindex\": [\n    {\n      \"label\": \"SecurityNews order:\",\n      \"type\": \"text\",\n      \"value\": \"5\",\n      \"default\": \"5\",\n      \"desc\": \"\"\n    }\n  ]\n}','0',' ','0','1671992311'),
   ('18','TelegramBot','TelegramBot','0','3','0','/**\n * TelegramBot\n *\n * TelegramBot\n *\n * @category    plugin\n * @internal    @events OnLogEvent,OnSendBot\n * @internal    @modx_category \n * @internal    @properties &chat_id=ID пользователя;text;83741005;ID пользователя вы можете узнать у бота <a href=\'https://t.me/ShowJsonBot\' target=\'_blank\'>https://t.me/ShowJsonBot</a> &chanel_id=ID Канала;text;;ID канала узнать после создания канала приёма заявок. Напишите на канале сообщение и перешлите его <a href=\'https://t.me/ShowJsonBot\' target=\'_blank\'>@ShowJsonBot</a> &bot_token=Токен бота;text;5742061218:AAE6zhQrQwnIPFh4yZr2-ABwr586c_3WULY;Токен созданного вами бота. Бот должен быть участником канала.\n * @internal    @disabled 0\n * @internal    @installset base\n */\nrequire MODX_BASE_PATH.\"assets/templates/projectsoft/develop/plugins/telegram_bot/plugin.telegram_bot.php\";','0','{\n  \"chat_id\": [\n    {\n      \"label\": \"ID пользователя\",\n      \"type\": \"text\",\n      \"value\": \"83741005\",\n      \"default\": \"ID пользователя вы можете узнать у бота <a href\",\n      \"desc\": \"\"\n    }\n  ],\n  \"chanel_id\": [\n    {\n      \"label\": \"ID Канала\",\n      \"type\": \"text\",\n      \"value\": \"\",\n      \"default\": \"ID канала узнать после создания канала приёма заявок. Напишите на канале сообщение и перешлите его <a href\",\n      \"desc\": \"\"\n    }\n  ],\n  \"bot_token\": [\n    {\n      \"label\": \"Токен бота\",\n      \"type\": \"text\",\n      \"value\": \"5742061218:AAE6zhQrQwnIPFh4yZr2-ABwr586c_3WULY\",\n      \"default\": \"Токен созданного вами бота. Бот должен быть участником канала.\",\n      \"desc\": \"\"\n    }\n  ]\n}','0',' ','1671995324','1672228226'),
-  ('19','EvoFileManagerDialog','<strong>1.2.4</strong> Открыте файлменеджера в окне редактирования документа, а не в новом окне браузера.','0','3','0','require MODX_BASE_PATH.\'assets/plugins/filemanageropen/plugin.filemanageropen.php\';\n','0','{\"show_buttons\":[{\"label\":\"Показать кнопки файлменеджера в ресурсе\",\"type\":\"list\",\"value\":\"1\",\"options\":\"0,1\",\"default\":\"1\",\"desc\":\"\"}],\"show_alert_copy\":[{\"label\":\"Показать сообщение о копировании пути в FileManager\",\"type\":\"list\",\"value\":\"0\",\"options\":\"0,1\",\"default\":\"0\",\"desc\":\"\"}]}','0','','0','0');
+  ('19','EvoFileManagerDialog','<strong>1.2.4</strong> Открыте файлменеджера в окне редактирования документа, а не в новом окне браузера.','0','3','0','require MODX_BASE_PATH.\'assets/plugins/filemanageropen/plugin.filemanageropen.php\';\n','0','{\"show_buttons\":[{\"label\":\"Показать кнопки файлменеджера в ресурсе\",\"type\":\"list\",\"value\":\"1\",\"options\":\"0,1\",\"default\":\"1\",\"desc\":\"\"}],\"show_alert_copy\":[{\"label\":\"Показать сообщение о копировании пути в FileManager\",\"type\":\"list\",\"value\":\"0\",\"options\":\"0,1\",\"default\":\"0\",\"desc\":\"\"}]}','0','','0','0'),
+  ('20','ManagerMenu','','0','0','0','//OnManagerTopPrerender','0','','1',' ','1672268726','1672269127');
 
 #
 # Dumping data for table `evo_site_snippets`
@@ -568,6 +992,10 @@ INSERT INTO `evo_site_templates` VALUES
   ('8','Шаблон «Документы»',NULL,'','0','6','','0','{{@FILE assets/templates/projectsoft/html/documents.html}}','0','0','0','1671685106'),
   ('9','Шаблон «404 Not Found»',NULL,'','0','6','','0','{{@FILE assets/templates/projectsoft/html/notfound.html}}','0','0','0','1671630535'),
   ('10','Шаблон «401 Unauthorized»',NULL,'','0','6','','0','{{@FILE assets/templates/projectsoft/html/unauthorized.html}}','0','0','0','1671630528');
+
+#
+# Dumping data for table `evo_site_tmplvar_access`
+#
 
 #
 # Dumping data for table `evo_site_tmplvar_contentvalues`
@@ -823,7 +1251,7 @@ INSERT INTO `evo_system_eventnames` VALUES
 #
 
 INSERT INTO `evo_system_settings` VALUES
-  ('settings_version','1.4.22'),
+  ('settings_version','1.4.21'),
   ('manager_theme','default'),
   ('server_offset_time','0'),
   ('manager_language','russian-UTF8'),
@@ -926,7 +1354,7 @@ INSERT INTO `evo_system_settings` VALUES
   ('system_email_webreminder_default','Здравствуйте, [+uid+]!\n\nЧтобы активировать ваш новый пароль, перейдите по следующей ссылке:\n\n[+surl+]\n\nПозже вы сможете использовать следующий пароль для авторизации: [+pwd+]\n\nЕсли это письмо пришло к вам по ошибке, пожалуйста, проигнорируйте его.\n\nС уважением, Администрация'),
   ('allow_multiple_emails','0'),
   ('manager_theme_mode','2'),
-  ('login_logo',''),
+  ('login_logo','assets/templates/projectsoft/images/login-logo.png'),
   ('login_bg',''),
   ('login_form_position','center'),
   ('login_form_style','dark'),
@@ -1010,6 +1438,47 @@ INSERT INTO `evo_system_settings` VALUES
   ('dop_styles','#js-show-iframe-wrapper{position:relative;display:flex;align-items:center;justify-content:center;width:100%;min-width:293px;max-width:100%;background:linear-gradient(138.4deg,#38bafe 26.49%,#2d73bc 79.45%);color:#fff;cursor:pointer}#js-show-iframe-wrapper .pos-banner-fluid *{box-sizing:border-box}#js-show-iframe-wrapper .pos-banner-fluid .pos-banner-btn_2{display:block;width:240px;min-height:56px;font-size:18px;line-height:24px;cursor:pointer;background:#0d4cd3;color:#fff;border:none;border-radius:8px;outline:0}#js-show-iframe-wrapper .pos-banner-fluid .pos-banner-btn_2:hover{background:#1d5deb}#js-show-iframe-wrapper .pos-banner-fluid .pos-banner-btn_2:focus{background:#2a63ad}#js-show-iframe-wrapper .pos-banner-fluid .pos-banner-btn_2:active{background:#2a63ad}@-webkit-keyframes fadeInFromNone{0%{display:none;opacity:0}1%{display:block;opacity:0}100%{display:block;opacity:1}}@keyframes fadeInFromNone{0%{display:none;opacity:0}1%{display:block;opacity:0}100%{display:block;opacity:1}}@font-face{font-family:LatoWebLight;src:url(https://pos.gosuslugi.ru/bin/fonts/Lato/fonts/Lato-Light.woff2) format(\"woff2\"),url(https://pos.gosuslugi.ru/bin/fonts/Lato/fonts/Lato-Light.woff) format(\"woff\"),url(https://pos.gosuslugi.ru/bin/fonts/Lato/fonts/Lato-Light.ttf) format(\"truetype\");font-style:normal;font-weight:400}@font-face{font-family:LatoWeb;src:url(https://pos.gosuslugi.ru/bin/fonts/Lato/fonts/Lato-Regular.woff2) format(\"woff2\"),url(https://pos.gosuslugi.ru/bin/fonts/Lato/fonts/Lato-Regular.woff) format(\"woff\"),url(https://pos.gosuslugi.ru/bin/fonts/Lato/fonts/Lato-Regular.ttf) format(\"truetype\");font-style:normal;font-weight:400}@font-face{font-family:LatoWebBold;src:url(https://pos.gosuslugi.ru/bin/fonts/Lato/fonts/Lato-Bold.woff2) format(\"woff2\"),url(https://pos.gosuslugi.ru/bin/fonts/Lato/fonts/Lato-Bold.woff) format(\"woff\"),url(https://pos.gosuslugi.ru/bin/fonts/Lato/fonts/Lato-Bold.ttf) format(\"truetype\");font-style:normal;font-weight:400}@font-face{font-family:RobotoWebLight;src:url(https://pos.gosuslugi.ru/bin/fonts/Roboto/Roboto-Light.woff2) format(\"woff2\"),url(https://pos.gosuslugi.ru/bin/fonts/Roboto/Roboto-Light.woff) format(\"woff\"),url(https://pos.gosuslugi.ru/bin/fonts/Roboto/Roboto-Light.ttf) format(\"truetype\");font-style:normal;font-weight:400}@font-face{font-family:RobotoWebRegular;src:url(https://pos.gosuslugi.ru/bin/fonts/Roboto/Roboto-Regular.woff2) format(\"woff2\"),url(https://pos.gosuslugi.ru/bin/fonts/Roboto/Roboto-Regular.woff) format(\"woff\"),url(https://pos.gosuslugi.ru/bin/fonts/Roboto/Roboto-Regular.ttf) format(\"truetype\");font-style:normal;font-weight:400}@font-face{font-family:RobotoWebBold;src:url(https://pos.gosuslugi.ru/bin/fonts/Roboto/Roboto-Bold.woff2) format(\"woff2\"),url(https://pos.gosuslugi.ru/bin/fonts/Roboto/Roboto-Bold.woff) format(\"woff\"),url(https://pos.gosuslugi.ru/bin/fonts/Roboto/Roboto-Bold.ttf) format(\"truetype\");font-style:normal;font-weight:400}@font-face{font-family:ScadaWebRegular;src:url(https://pos.gosuslugi.ru/bin/fonts/Scada/Scada-Regular.woff2) format(\"woff2\"),url(https://pos.gosuslugi.ru/bin/fonts/Scada/Scada-Regular.woff) format(\"woff\"),url(https://pos.gosuslugi.ru/bin/fonts/Scada/Scada-Regular.ttf) format(\"truetype\");font-style:normal;font-weight:400}@font-face{font-family:ScadaWebBold;src:url(https://pos.gosuslugi.ru/bin/fonts/Scada/Scada-Bold.woff2) format(\"woff2\"),url(https://pos.gosuslugi.ru/bin/fonts/Scada/Scada-Bold.woff) format(\"woff\"),url(https://pos.gosuslugi.ru/bin/fonts/Scada/Scada-Bold.ttf) format(\"truetype\");font-style:normal;font-weight:400}@font-face{font-family:Geometria;src:url(https://pos.gosuslugi.ru/bin/fonts/Geometria/Geometria.eot);src:url(https://pos.gosuslugi.ru/bin/fonts/Geometria/Geometria.eot?#iefix) format(\"embedded-opentype\"),url(https://pos.gosuslugi.ru/bin/fonts/Geometria/Geometria.woff) format(\"woff\"),url(https://pos.gosuslugi.ru/bin/fonts/Geometria/Geometria.ttf) format(\"truetype\");font-weight:400;font-style:normal}@font-face{font-family:Geometria-ExtraBold;src:url(https://pos.gosuslugi.ru/bin/fonts/Geometria/Geometria-ExtraBold.eot);src:url(https://pos.gosuslugi.ru/bin/fonts/Geometria/Geometria-ExtraBold.eot?#iefix) format(\"embedded-opentype\"),url(https://pos.gosuslugi.ru/bin/fonts/Geometria/Geometria-ExtraBold.woff) format(\"woff\"),url(https://pos.gosuslugi.ru/bin/fonts/Geometria/Geometria-ExtraBold.ttf) format(\"truetype\");font-weight:800;font-style:normal}#js-show-iframe-wrapper{background:var(--pos-banner-fluid-12__background)}#js-show-iframe-wrapper .pos-banner-fluid .pos-banner-btn_2{width:100%;min-height:52px;background:#fff;color:#0b1f33;font-size:16px;font-family:LatoWeb,sans-serif;font-weight:400;padding:0;line-height:1.2}#js-show-iframe-wrapper .pos-banner-fluid .pos-banner-btn_2:active,#js-show-iframe-wrapper .pos-banner-fluid .pos-banner-btn_2:focus,#js-show-iframe-wrapper .pos-banner-fluid .pos-banner-btn_2:hover{background:#e4ecfd}#js-show-iframe-wrapper .bf-12{position:relative;display:grid;grid-template-columns:var(--pos-banner-fluid-12__grid-template-columns);grid-template-rows:var(--pos-banner-fluid-12__grid-template-rows);width:100%;max-width:var(--pos-banner-fluid-12__max-width);box-sizing:border-box;grid-auto-flow:row dense}#js-show-iframe-wrapper .bf-12__decor{background:var(--pos-banner-fluid-12__bg-url) var(--pos-banner-fluid-12__bg-url-position) no-repeat;background-size:var(--pos-banner-fluid-12__bg-size);background-color:#f8efec;position:relative}#js-show-iframe-wrapper .bf-12__content{display:flex;flex-direction:column;padding:var(--pos-banner-fluid-12__content-padding);grid-row:var(--pos-banner-fluid-12__content-grid-row);justify-content:center}#js-show-iframe-wrapper .bf-12__text{margin:var(--pos-banner-fluid-12__text-margin);font-size:var(--pos-banner-fluid-12__text-font-size);line-height:1.2;font-family:LatoWeb,sans-serif;font-weight:700;color:#0b1f33}#js-show-iframe-wrapper .bf-12__bottom-wrap{display:flex;flex-direction:row;align-items:center}#js-show-iframe-wrapper .bf-12__logo-wrap{position:absolute;top:var(--pos-banner-fluid-12__logo-wrap-top);right:var(--pos-banner-fluid-12__logo-wrap-right)}#js-show-iframe-wrapper .bf-12__logo{width:var(--pos-banner-fluid-12__logo-width);margin-left:1px}#js-show-iframe-wrapper .bf-12__slogan{font-family:LatoWeb,sans-serif;font-weight:700;font-size:var(--pos-banner-fluid-12__slogan-font-size);line-height:1.2;color:#005ca9}#js-show-iframe-wrapper .bf-12__btn-wrap{width:100%;max-width:var(--pos-banner-fluid-12__button-wrap-max-width)}'),
   ('dop_scripts','<script src=\"https://pos.gosuslugi.ru/bin/script.min.js\"></script>\n\n<script type=\"text/javascript\">(function(){\"use strict\";function ownKeys(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e);if(t)r=r.filter(function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable});n.push.apply(n,r)}return n}function _objectSpread(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{};if(t%2)ownKeys(Object(n),true).forEach(function(t){_defineProperty(e,t,n[t])});else if(Object.getOwnPropertyDescriptors)Object.defineProperties(e,Object.getOwnPropertyDescriptors(n));else ownKeys(Object(n)).forEach(function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))})}return e}function _defineProperty(e,t,n){if(t in e)Object.defineProperty(e,t,{value:n,enumerable:true,configurable:true,writable:true});else e[t]=n;return e}var POS_PREFIX_12=\"--pos-banner-fluid-12__\",posOptionsInitialBanner12={background:\"#50b3ff\",\"grid-template-columns\":\"100%\",\"grid-template-rows\":\"188px auto\",\"max-width\":\"100%\",\"text-font-size\":\"24px\",\"text-margin\":\"0 0 24px 0\",\"button-wrap-max-width\":\"100%\",\"bg-url\":\"url(\'https://pos.gosuslugi.ru/bin/banner-fluid/6/banner-fluid-bg-6.svg\')\",\"bg-url-position\":\"center bottom\",\"bg-size\":\"contain\",\"content-padding\":\"24px\",\"content-grid-row\":\"0\",\"logo-width\":\"65px\",\"logo-wrap-top\":\"16px\",\"logo-wrap-right\":\"13px\",\"slogan-font-size\":\"12px\"},setStyles=function(e,t){var n=arguments.length>2&&void 0!==arguments[2]?arguments[2]:POS_PREFIX_12;Object.keys(e).forEach(function(r){t.style.setProperty(n+r,e[r])})},removeStyles=function(e,t){var n=arguments.length>2&&void 0!==arguments[2]?arguments[2]:POS_PREFIX_12;Object.keys(e).forEach(function(e){t.style.removeProperty(n+e)})};function changePosBannerOnResize(){var e=document.documentElement,t=_objectSpread({},posOptionsInitialBanner12),n=document.getElementById(\"js-show-iframe-wrapper\"),r=n?n.offsetWidth:document.body.offsetWidth;if(r>340)t[\"grid-template-rows\"]=\"236px auto\",t[\"bg-url\"]=\"url(\'https://pos.gosuslugi.ru/bin/banner-fluid/6/banner-fluid-bg-6-2.svg\')\",t[\"button-wrap-max-width\"]=\"209px\",t[\"content-padding\"]=\"24px 32px\",t[\"text-margin\"]=\"0 0 24px 0\";if(r>350)t[\"bg-url-position\"]=\"center bottom calc(100% - 40px)\";if(r>415)t[\"bg-url-position\"]=\"center bottom\";if(r>568)t[\"grid-template-columns\"]=\"1fr 292px\",t[\"grid-template-rows\"]=\"100%\",t[\"content-grid-row\"]=\"1\",t[\"content-padding\"]=\"32px 24px 24px\",t[\"bg-url\"]=\"url(\'https://pos.gosuslugi.ru/bin/banner-fluid/6/banner-fluid-bg-6.svg\')\";if(r>783)t[\"grid-template-columns\"]=\"1fr 400px\",t[\"text-font-size\"]=\"32px\",t[\"content-padding\"]=\"32px 24px\",t[\"bg-url\"]=\"url(\'https://pos.gosuslugi.ru/bin/banner-fluid/6/banner-fluid-bg-6-2.svg\')\",t[\"bg-url-position\"]=\"center bottom calc(100% - 25px)\";if(r>820)t[\"grid-template-columns\"]=\"1fr 420px\",t[\"bg-url-position\"]=\"center bottom\";if(r>1098)t[\"bg-url\"]=\"url(\'https://pos.gosuslugi.ru/bin/banner-fluid/6/banner-fluid-bg-6-3.svg\')\",t[\"grid-template-columns\"]=\"1fr 557px\",t[\"text-font-size\"]=\"36px\",t[\"content-padding\"]=\"32px 32px 32px 50px\",t[\"logo-width\"]=\"78px\",t[\"logo-wrap-top\"]=\"20px\",t[\"logo-wrap-right\"]=\"17px\",t[\"slogan-font-size\"]=\"15px\";if(r>1422)t[\"max-width\"]=\"1422px\",t[\"grid-template-columns\"]=\"1fr 720px\",t[\"content-padding\"]=\"32px 48px 32px 160px\",t.background=\"linear-gradient(90deg, #50b3ff 50%, #f8efec 50%)\";setStyles(t,e)}changePosBannerOnResize(),window.addEventListener(\"resize\",changePosBannerOnResize),window.onunload=function(){var e=document.documentElement,t=_objectSpread({},posOptionsInitialBanner12);window.removeEventListener(\"resize\",changePosBannerOnResize),removeStyles(t,e)};})();</script>\n\n<script type=\"text/javascript\">Widget(\"https://pos.gosuslugi.ru/form\", 333863)</script>'),
   ('yandex_verification','');
+
+#
+# Dumping data for table `evo_user_messages`
+#
+
+#
+# Dumping data for table `evo_user_roles`
+#
+
+INSERT INTO `evo_user_roles` VALUES
+  ('2','Editor','Limited to managing content','1','1','1','1','1','1','1','0','1','1','1','0','0','0','0','0','0','0','0','1','0','0','0','0','0','0','0','1','0','1','0','1','1','1','1','1','0','1','1','1','0','0','1','0','0','0','0','0','0','0','0','0','0','0','0','0','0','1','0','0','0','0','0','0','0','1','0','0','1','1','1'),
+  ('3','Publisher','Editor with expanded permissions including manage users, update Elements and site settings','1','1','1','1','1','1','1','1','1','1','1','0','1','1','1','0','0','1','1','1','1','1','1','0','0','0','0','1','1','1','1','1','1','1','1','1','0','1','1','1','1','1','1','0','0','0','0','0','1','0','0','0','0','0','0','0','0','1','0','0','1','1','1','1','0','1','0','0','1','1','1'),
+  ('1','Administrator','Site administrators have full access to all functions','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1');
+
+#
+# Dumping data for table `evo_user_settings`
+#
+
+#
+# Dumping data for table `evo_web_groups`
+#
+
+#
+# Dumping data for table `evo_web_user_attributes`
+#
+
+#
+# Dumping data for table `evo_web_user_settings`
+#
+
+#
+# Dumping data for table `evo_web_users`
+#
+
+#
+# Dumping data for table `evo_webgroup_access`
+#
+
+#
+# Dumping data for table `evo_webgroup_names`
+#
 
 
 # --------------------------------------------------------
