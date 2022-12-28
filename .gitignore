@@ -98,6 +98,7 @@ site/assets/templates/projectsoft/j*
 
 site/composer.lock
 
+!site/.htaccess
 !site/composer.json
 !site/assets/plugins/tinymce4/theme/theme.tinymce4.rezerv.inc.php
 !site/assets/tvs/multitv/configs/ps*
