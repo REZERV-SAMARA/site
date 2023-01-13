@@ -170,6 +170,12 @@ module.exports = function(grunt){
 					'src/js/main.js'
 				],
 				dest: 'test/js/main.js'
+			},
+			pdfjs: {
+				src: [
+					'site/viewer/web/viewer-edit.js'
+				],
+				dest: 'test/viewer/viewer-mini.js'
 			}
 		},
 		uglify: {
@@ -193,7 +199,19 @@ module.exports = function(grunt){
 						rename: function (dst, src) {
 							return dst + '/' + src.replace('.js', '.min.js');
 						}
-					}
+					},
+					/*{
+						expand: true,
+						flatten : true,
+						src: [
+							'test/viewer/viewer-mini.js'
+						],
+						dest: 'site/viewer/web',
+						filter: 'isFile',
+						rename: function (dst, src) {
+							return dst + '/' + src.replace('-mini.js', '.min.js');
+						}
+					}*/
 				]
 			}
 		},

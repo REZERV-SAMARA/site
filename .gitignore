@@ -97,6 +97,7 @@ site/assets/templates/projectsoft/i*
 site/assets/templates/projectsoft/j*
 
 site/composer.lock
+src/.*
 
 !site/.htaccess
 !site/composer.json

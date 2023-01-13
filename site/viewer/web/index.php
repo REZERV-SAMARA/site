@@ -432,6 +432,7 @@
         height: 20px !important;
         line-height: 1 !important;
       }
+      .viewerEmbeded #sidebarContainer,
       .viewerEmbeded #viewerContainer {
         top: 62px;
       }
