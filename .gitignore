@@ -99,6 +99,11 @@ site/assets/templates/projectsoft/j*
 site/composer.lock
 src/.*
 
+# viewer
+site/viewer/web/viewer.html
+site/viewer/web/viewer.js
+site/viewer/web/viewer.js.map
+
 !site/.htaccess
 !site/composer.json
 !site/assets/plugins/tinymce4/theme/theme.tinymce4.rezerv.inc.php
