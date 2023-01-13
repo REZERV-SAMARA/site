@@ -18,9 +18,11 @@ site/.htaccess
 site/*.php
 site/*.md
 site/*.txt
+
+
+# assets dirs
 site/assets/.thumbs
 site/assets/thumbs
-
 site/assets/backup
 site/assets/cache
 site/assets/export
@@ -30,7 +32,9 @@ site/assets/import
 site/assets/js
 site/assets/lib
 site/assets/modules
+site/assets/snippets
 
+# assets plugins
 site/assets/plugins/*.*
 site/assets/plugins/c*
 site/assets/plugins/e*
@@ -40,6 +44,7 @@ site/assets/plugins/q*
 site/assets/plugins/tr*
 site/assets/plugins/u*
 
+# assets plugins tinymce4
 site/assets/plugins/tinymce4/b*
 site/assets/plugins/tinymce4/c*
 site/assets/plugins/tinymce4/g*
@@ -49,8 +54,8 @@ site/assets/plugins/tinymce4/l*
 site/assets/plugins/tinymce4/p*
 site/assets/plugins/tinymce4/s*
 site/assets/plugins/tinymce4/t*
-site/assets/plugins/[a-z]+
 
+# assets plugins pagebuilder
 site/assets/plugins/pagebuilder/i*
 site/assets/plugins/pagebuilder/j*
 site/assets/plugins/pagebuilder/l*
@@ -59,11 +64,13 @@ site/assets/plugins/pagebuilder/s*
 site/assets/plugins/pagebuilder/t*
 site/assets/plugins/pagebuilder/config/*.sample
 
+# assets site
 site/assets/site
 
-site/assets/snippets
+# assets tvs
 site/assets/tvs/*.html
 
+# assets tvs multitv
 site/assets/tvs/multitv/*.*
 site/assets/tvs/multitv/b*
 site/assets/tvs/multitv/cs*
@@ -76,7 +83,6 @@ site/assets/tvs/multitv/s*
 site/assets/tvs/multitv/t*
 site/assets/tvs/multitv/m*
 site/assets/tvs/multitv/u*
-
 site/assets/tvs/multitv/configs/c*
 site/assets/tvs/multitv/configs/d*
 site/assets/tvs/multitv/configs/e*
@@ -85,8 +91,10 @@ site/assets/tvs/multitv/configs/l*
 site/assets/tvs/multitv/configs/m*
 site/assets/tvs/multitv/configs/s*
 
+# assets tvs pagebuilder
 site/assets/tvs/pagebuilder
 
+# assets vendor and assets templates
 site/assets/vendor
 site/assets/*.html
 site/assets/templates/*.html
@@ -96,14 +104,19 @@ site/assets/templates/projectsoft/h*
 site/assets/templates/projectsoft/i*
 site/assets/templates/projectsoft/j*
 
+# composer and . ext file
 site/composer.lock
 src/.*
 
-# viewer
+# viewer directory
 site/viewer/web/viewer.html
 site/viewer/web/viewer.js
 site/viewer/web/viewer.js.map
 
+# editorconfig
+/.editorconfig
+
+# enabled view files
 !site/.htaccess
 !site/composer.json
 !site/assets/plugins/tinymce4/theme/theme.tinymce4.rezerv.inc.php
