@@ -22,9 +22,9 @@ module.exports = function(grunt){
 					'site/assets/templates/projectsoft/html',
 					'site/assets/templates/projectsoft/images',
 					'site/assets/templates/projectsoft/js',
-					'site/manifest.webmanifest',
-					'site/*.ico',
-					'site/*.png'
+					//'site/manifest.webmanifest',
+					//'site/*.ico',
+					//'site/*.png'
 				]
 			},
 			favicons: {

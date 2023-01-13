@@ -55,8 +55,8 @@
 	});
 	$(document).on('click', ".main a", function(e){
 		const base = window.location.origin,
-			reg = new RegExp("^" + base, 'gi'),
-			regn = new RegExp('\.pdf$', 'gi'),
+			reg = new RegExp("^" + base, 'i'),
+			regn = new RegExp('\.pdf$', 'i'),
 			href = e.target.href;
 		if(reg.test(href)) {
 			try {
@@ -64,6 +64,22 @@
 					src = url.pathname;
 				if(regn.test(src)){
 					e.preventDefault();
+					var _reg = new RegExp("^" + base, 'i'),
+						_href = href,
+						go = false;
+					if(!$(this).data('google')){
+						var go = window.location.origin + '/viewer/web/?file=' + encodeURI(src);
+						$(this).data('google', go);
+					}
+					if(_reg.test(_href)){
+						e.preventDefault();
+						_href = $(this).data('google');
+						$.fancybox.open({
+							src: _href
+						});
+						return !1;
+					}
+					/*
 					let pdf_href = isPDF ? href : base + '/assets/pdfjs/viewer/?file=' + href.replace(reg, '');
 					$.fancybox.open({
 						toolbar: true,
@@ -82,6 +98,7 @@
 							}
 						}
 					});
+					*/
 					return !1
 				}
 			} catch (error) {
