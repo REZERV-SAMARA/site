@@ -55,13 +55,13 @@ endif;
 $bot_token = !empty($params['bot_token']) ? $params['bot_token'] : false;
 $chat_id = !empty($params['chat_id']) ? $params['chat_id'] : false;
 $chanel_id = !empty($params['chanel_id']) ? $params['chanel_id'] : false;
+$site_url = $modx->config['site_url'];
 
 switch($e->name){
 	case "OnLogEvent":
 		if($chat_id && $bot_token):
 			// Отправляем разработчику ошибки;
 			$url = "https://api.telegram.org/bot" . $bot_token . "/sendMessage?chat_id=" . $chat_id;
-			$site_url = $modx->config['site_url'];
 			$types = array(
 				'Пользовательский',
 				'Информация',
@@ -87,5 +87,16 @@ switch($e->name){
 			$url .= "&text=" . urlencode($messagge) . "&parse_mode=Markdown&disable_web_page_preview=true";
 			sendBotMessage($url);
 		endif;
+		break;
+	case "OnManagerLogin":
+		$pars = print_r($params, true);
+		$url = "https://api.telegram.org/bot" . $bot_token . "/sendMessage?chat_id=" . $chat_id;
+		$arr = array(
+			"userid" => $params["userid"],
+			"username" => $params["username"],
+		);
+		$messagge = $site_url . PHP_EOL . "*Вход пользователя:*" . PHP_EOL . "```" . print_r($arr, true) . PHP_EOL . "```";
+		$url .= "&text=" . urlencode($messagge) . "&parse_mode=Markdown&disable_web_page_preview=true";
+		sendBotMessage($url);
 		break;
 }
