@@ -12,7 +12,7 @@
 <link rel="resource" type="application/l10n" href="locale/locale.properties">
 <script src="../build/pdf.js"></script>
 
-  <script src="viewer-edit.js"></script>
+  <script src="viewer-edit.mini.js"></script>
 
   </head>
 

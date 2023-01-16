@@ -22,9 +22,10 @@ module.exports = function(grunt){
 					'site/assets/templates/projectsoft/html',
 					'site/assets/templates/projectsoft/images',
 					'site/assets/templates/projectsoft/js',
-					//'site/manifest.webmanifest',
-					//'site/*.ico',
-					//'site/*.png'
+					'site/manifest.webmanifest',
+					'site/*.ico',
+					'site/*.png',
+					'test/**/*'
 				]
 			},
 			favicons: {
@@ -62,6 +63,7 @@ module.exports = function(grunt){
 		},
 		favicons: {
 			options: {
+				engine: "magick",
 				debug: true,
 				regular: true,
 				trueColor: true,
@@ -70,8 +72,8 @@ module.exports = function(grunt){
 				timestamp: true,
 				/* Apple */
 				apple: true,
-				appleTouchBackgroundColor: 'none',
-				appleTouchPadding: 10,
+				appleTouchBackgroundColor: "none",
+				appleTouchPadding: 0,
 				/* Windows */
 				windowsTile: true,
 				tileBlackWhite: false,
