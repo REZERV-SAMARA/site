@@ -64,7 +64,7 @@ module.exports = function(grunt){
 		favicons: {
 			options: {
 				engine: "magick",
-				debug: true,
+				debug: false,
 				regular: true,
 				trueColor: true,
 				sharp: 0,
